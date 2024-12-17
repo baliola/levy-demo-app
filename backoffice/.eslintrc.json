@@ -1,0 +1,74 @@
+{
+  "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-uses-react": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "no-unused-vars": ["warn", {
+      "args": "none"
+    }],
+    "no-console": ["warn", { "allow": ["error"] }],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/consistent-type-imports": ["error", {
+      "prefer": "type-imports"
+    }],
+    "sort-imports": ["error", { 
+        "ignoreCase": true, 
+        "ignoreDeclarationSort": true 
+      }
+    ],
+    "import/order": [
+      1, 
+      { 
+        "groups": [
+          "external", 
+          "builtin", 
+          "internal", 
+          "sibling", 
+          "parent", 
+          "index"
+        ],
+        "pathGroups": [
+          { 
+            "pattern": "components", 
+            "group": "internal" 
+          }, 
+          { 
+            "pattern": "common", 
+            "group": "internal" 
+          }, 
+          { 
+            "pattern": "routes/**", 
+            "group": "internal" 
+          }, 
+          { 
+            "pattern": "assets/**", 
+            "group": "internal", 
+            "position": "after" 
+          }
+        ], 
+        "pathGroupsExcludedImportTypes": 
+          ["internal"], 
+          "alphabetize": { 
+            "order": "asc", 
+            "caseInsensitive": true 
+          }
+      } 
+    ] 
+  }
+}
