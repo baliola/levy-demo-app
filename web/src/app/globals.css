@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+:root {
+  font-size: 15px;
+}
+
+@media only screen and (min-width: 1440px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1840px) {
+  :root {
+    font-size: 18px;
+  }
+}
+
+.scrollable-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} 
+
+.community-modal {
+  height: 0%;
+  transition: all;
+  transition-duration: 300ms;
+  overflow: hidden;
+}
+
+.community-modal.active {
+  height: 100%;
+}
+
+.drawer {
+  position: fixed;
+  right: -100%;
+  transition: all;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.drawer.show {
+  right: -0%;
+}
+
+.setting-modal {
+  top: 0%;
+  height: 0rem;
+  transition: all;
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+
+.setting-modal.show {
+  top: -320%;
+  height: 6rem;
+  overflow-y: visible;
+}
+
+.h-custom-language-list {
+  height: calc(3 * 2rem);
+}
+
+.language-list {
+  height: 0rem;
+  top: 0%;
+  transition: all;
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+
+.language-list.show {
+  height: 6rem;
+  top: -200%;
+}
+
+/* Modal Help */
+
+.modal {
+  z-index: -100;
+}
+
+.modal.show {
+  z-index: 1000;
+}
+
+.modal > div {
+  opacity: 0;
+}
+
+.modal.show > div {
+  opacity: 100;
+  transform: scale(1.05);
+}
+
+.shadow-modal {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+/* Float Animation */
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
