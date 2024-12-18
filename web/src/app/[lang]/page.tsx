@@ -2,17 +2,13 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { ReactElement } from "react";
-import Images from "@/constants/images";
 import ExemptionForm from "./components/ExemptionForm";
 import type { Locale } from "./dictionaries";
 import { getDictionary } from "./dictionaries";
+import Images from "@/constants/images";
 
 const navigations = [
   { name: "Events", href: "#", current: true },

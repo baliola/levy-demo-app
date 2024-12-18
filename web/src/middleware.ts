@@ -1,50 +1,78 @@
-import type { NextRequest} from "next/server";
+import { match } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-// import Negotiator from "negotiator";
-// import { match } from "@formatjs/intl-localematcher";
+import CookieKey from "./constants/cookie_key";
 
-let locales = ["en", "id"];
-// let defaultLocale = "en";
-const ignoredExtensions = ['.jpg', '.png', '.css', '.js', '.svg', '.ico'];
+const ignoredExtensions = [".jpg", ".png", ".css", ".js", ".svg", ".ico"];
+const locales = ["en", "id"];
+const defaultLocale = "en";
+const PUBLIC_PATHS = ["/auth/login"];
 
-// Get the preferred locale, similar to the above or using a library
-// function getLocale(request: NextRequest) {
-//   const acceptLang = request.headers.get("Accept-Language");
-//   if (!acceptLang) return defaultLocale;
-//   const headers = { "accept-language": acceptLang };
-//   const languages = new Negotiator({ headers }).languages();
-//   return match(languages, locales, defaultLocale);
-// }
+function getLocale(request: NextRequest): string {
+  const acceptLang = request.headers.get("Accept-Language");
+  if (!acceptLang) return defaultLocale;
+  const headers = { "accept-language": acceptLang };
+  const languages = new Negotiator({ headers }).languages();
+  return match(languages, locales, defaultLocale);
+}
 
 export function middleware(request: NextRequest): void | NextResponse {
-  // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathname.startsWith('/images/')) {
-    return NextResponse.next(); // Bypass locale processing
+  // Bypass locale processing for assets
+  if (pathname.startsWith("/images/")) {
+    return NextResponse.next();
   }
 
-  if (ignoredExtensions.some(ext => pathname.endsWith(ext))) {
+  if (ignoredExtensions.some((ext) => pathname.endsWith(ext))) {
     return NextResponse.next(); // Bypass the middleware
   }
 
-  if (pathnameHasLocale) return;
+  // Extract the locale from the pathname if it exists
+  const pathnameLocale = locales.find(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
 
-  // Redirect if there is no locale
-  const locale = request.cookies.get('locale')?.value ?? 'en';
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  const locale = pathnameLocale ?? getLocale(request);
+
+  // Get the path without the locale prefix
+  const pathWithoutLocale = pathnameLocale
+    ? pathname.replace(`/${pathnameLocale}`, "")
+    : pathname;
+
+  // Check if the user is logged in
+  const isLoggedIn =
+    request.cookies.get(CookieKey.IS_LOGGED_IN)?.value === "true";
+
+  // Handle root path
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      new URL(isLoggedIn ? `/${locale}/` : `/${locale}/auth/login`, request.url)
+    );
+  }
+
+  // Check if the current path (without locale) is public
+  const isPublicPath = PUBLIC_PATHS.some((path) => pathWithoutLocale === path);
+
+  // Redirect logic
+  if (!isLoggedIn && !isPublicPath) {
+    // Redirect to login if trying to access protected route while not logged in
+    return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
+  } else if (isLoggedIn && isPublicPath) {
+    // Redirect to dashboard if trying to access public route while logged in
+    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
+  }
+
+  // Add locale to URL if it's missing
+  if (!pathnameLocale) {
+    request.nextUrl.pathname = `/${locale}${pathname}`;
+    return NextResponse.redirect(request.nextUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next).*)",
-    // Optional: only run on root (/) URL
-    // '/'
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
