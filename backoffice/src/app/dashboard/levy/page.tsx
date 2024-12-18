@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { type ReactElement, useEffect } from "react";
@@ -6,186 +6,223 @@ import RestrictedPage from "@/src/components/RestrictedPage";
 import { PermissionName } from "@/src/config/data";
 import Images from "@/src/constants/images";
 import useAccount from "@/src/hooks/useAccount";
-import useProject from "@/src/hooks/useProject";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
-import { FilterProject } from "./components/FilterProject";
-import { ModalAddProject } from "./components/ModalAddProject";
-import { ProjectTable } from "./components/ProjectTable";
-import { SearchProject } from "./components/SearchProject";
-import { SortProject } from "./components/SortProject";
+import { AccountTable } from "./components/AccountTable";
+import { FilterAccount } from "./components/FilterAccount";
+import { ModalAddAccount } from "./components/ModalAddAccount";
+import { SearchAccount } from "./components/SearchAccount";
+import { SortAccount } from "./components/SortAccount";
+import StatItem from "./components/StatsItem";
+import { CiCircleCheck } from "react-icons/ci";
+import { ImCancelCircle } from "react-icons/im";
+import { FaRegCheckCircle } from "react-icons/fa";
 
-export default function Project (): ReactElement {
+export default function Account(): ReactElement {
   const {
-    pageProject,
-    limitProject,
-    totalProject,
-    projectSortIsAscending,
-    projectSelectedSort,
-    projectInputValue,
-    projectSearchQuery,
-    projectSelectedTagFilter,
-    projects,
-    projectTagOptions,
-    projectExistingTagOptions,
-    projectSortOptions,
-    showFilterTagModal,
+    pageAccount,
+    limitAccount,
+    totalAccount,
+    accountSortIsAscending,
+    accountSelectedSort,
+    accountInputValue,
+    accountSearchQuery,
+    accountSelectedRoleFilter,
+    accounts,
+    accountRoleOptions,
+    accountSortOptions,
+    showFilterRoleModal,
     showSortModal,
-    setPageProject,
-    setProjectInputValue,
-    setProjectSearchQuery,
-    setProjectSelectedTagFilter,
-    setProjectSortIsAscending,
-    setProjectSelectedSort,
-    setShowFilterTagModal,
+    loadingStatus,
+    selectedAccount,
+    setPageAccount,
+    setAccountInputValue,
+    setAccountSearchQuery,
+    setAccountSelectedRoleFilter,
+    setAccountSortIsAscending,
+    setAccountSelectedSort,
+    setShowFilterRoleModal,
     setShowSortModal,
-    getProjectList,
-    getProjectTagOptions,
-    getProjectExistingTagOptions,
-    createProject,
-    editProject,
-    deleteProject
-  } = useProject()
+    getAccountList,
+    getAccountRoleOptions,
+    createAccount,
+    editAccountRole,
+    activateAccount,
+    deactivateAccount,
+    deleteAccount,
+    getAccountProfile,
+  } = useAccount();
 
-  const { userLoggedIn } = useCentralStore()
-  const { getAccountProfile } = useAccount()
+  const { userLoggedIn } = useCentralStore();
 
   useEffect(() => {
     if (userLoggedIn) {
-      if (checkUserPermission(userLoggedIn, PermissionName.PERMISSION_BACKOFFICE_SHOW_PROJECT)) {
-        getProjectTagOptions()
-        getProjectExistingTagOptions()
-      
-        getProjectList({
-          page: pageProject,
-          limit: limitProject,
-          sort: projectSelectedSort,
-          order: projectSortIsAscending ? 'asc' : 'desc',
-          search: projectSearchQuery,
-          filter: projectSelectedTagFilter
-        })
+      if (
+        checkUserPermission(
+          userLoggedIn,
+          PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
+        )
+      ) {
+        getAccountRoleOptions();
+        getAccountList({
+          page: pageAccount,
+          limit: limitAccount,
+          sort: accountSelectedSort,
+          order: accountSortIsAscending ? "asc" : "desc",
+          search: accountSearchQuery,
+          filter: accountSelectedRoleFilter.name,
+        });
       }
     } else {
-      getAccountProfile()
+      getAccountProfile();
     }
-  }, [userLoggedIn])
+  }, [userLoggedIn]);
 
   useEffect(() => {
-    if (projectSelectedTagFilter !== '' || projectSearchQuery !== '') setPageProject(1)
-  }, [projectSelectedTagFilter, projectSearchQuery])
+    if (accountSelectedRoleFilter.name !== "" || accountSearchQuery !== "")
+      setPageAccount(1);
+  }, [accountSelectedRoleFilter, accountSearchQuery]);
 
   return (
     <main className="overflow-x-hidden min-h-[calc(100vh-6rem)]">
       <div className="p-6 sm:p-8 lg:p-12 flex flex-col gap-y-6 lg:gap-y-10 h-full">
-        {
-          userLoggedIn !== undefined
-            ? <>
-              {
-                checkUserPermission(userLoggedIn, PermissionName.PERMISSION_BACKOFFICE_SHOW_PROJECT)
-                  ? <>
-                    <div className="flex flex-col lg:flex-row gap-3 items-end">
-                      <div className="w-full">
-                        <SearchProject
+        {userLoggedIn !== undefined ? (
+          <>
+            <div className="flex flex-col gap-y-4 sm:grid sm:grid-cols-2 sm:gap-x-2">
+              <StatItem
+                props={{
+                  name: `Paid`,
+                  icon: FaRegCheckCircle,
+                  value: "1000",
+                  isTime: true,
+                }}
+              />{" "}
+              <StatItem
+                props={{
+                  name: `Unpaid`,
+                  icon: ImCancelCircle,
+                  value: "10",
+                  isTime: true,
+                }}
+              />{" "}
+            </div>
+            {checkUserPermission(
+              userLoggedIn,
+              PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
+            ) ? (
+              <>
+                <div className="flex flex-col lg:flex-row gap-3 items-end">
+                  <div className="w-full">
+                    <SearchAccount
+                      props={{
+                        limitAccount,
+                        accountSortIsAscending,
+                        accountSelectedSort,
+                        accountSelectedRoleFilter,
+                        accountInputValue,
+                        accountSearchQuery,
+                        setAccountInputValue,
+                        setAccountSearchQuery,
+                        getAccountList,
+                      }}
+                    />
+                  </div>
+                  <div className="w-full flex gap-3 items-end">
+                    <div className="grow">
+                      <FilterAccount
+                        props={{
+                          limitAccount,
+                          accountSortIsAscending,
+                          accountSelectedSort,
+                          accountSearchQuery,
+                          accountSelectedRoleFilter,
+                          accountRoleOptions,
+                          showFilterRoleModal,
+                          setAccountSelectedRoleFilter,
+                          setShowFilterRoleModal,
+                          getAccountList,
+                        }}
+                      />
+                    </div>
+                    <div className="grow">
+                      <SortAccount
+                        props={{
+                          pageAccount,
+                          limitAccount,
+                          accountSortIsAscending,
+                          accountSortOptions,
+                          accountSelectedSort,
+                          accountSearchQuery,
+                          accountSelectedRoleFilter,
+                          showSortModal,
+                          setAccountSortIsAscending,
+                          setAccountSelectedSort,
+                          setShowSortModal,
+                          getAccountList,
+                        }}
+                      />
+                    </div>
+                    {checkUserPermission(
+                      userLoggedIn,
+                      PermissionName.PERMISSION_BACKOFFICE_CREATE_ACCOUNT
+                    ) && (
+                      <div className="flex w-fit">
+                        <ModalAddAccount
                           props={{
-                            limitProject,
-                            projectSortIsAscending,
-                            projectSelectedSort,
-                            projectSelectedTagFilter,
-                            projectInputValue,
-                            projectSearchQuery,
-                            setProjectSearchQuery,
-                            setProjectInputValue,
-                            getProjectList
+                            accountRoleOptions,
+                            setAccountSearchQuery,
+                            setAccountInputValue,
+                            setAccountSelectedRoleFilter,
+                            createAccount,
+                            editAccountRole,
                           }}
                         />
                       </div>
-                      <div className="w-full flex gap-3 items-end">
-                        <div className="grow">
-                          <FilterProject 
-                            props={{
-                              limitProject,
-                              projectSortIsAscending,
-                              projectSelectedSort,
-                              projectSearchQuery,
-                              projectSelectedTagFilter,
-                              projectExistingTagOptions,
-                              showFilterTagModal,
-                              setProjectSelectedTagFilter,
-                              setShowFilterTagModal,
-                              getProjectList
-                            }}
-                          />
-                        </div>
-                        <div className="grow">
-                          <SortProject 
-                            props={{
-                              pageProject,
-                              limitProject,
-                              projectSortIsAscending,
-                              projectSortOptions,
-                              projectSelectedSort,
-                              projectSearchQuery,
-                              projectSelectedTagFilter,
-                              showSortModal,
-                              setProjectSortIsAscending,
-                              setProjectSelectedSort,
-                              setShowSortModal,
-                              getProjectList,
-                            }}
-                          />
-                        </div>
-                        {
-                          checkUserPermission(userLoggedIn, PermissionName.PERMISSION_BACKOFFICE_CREATE_PROJECT) && <div className="flex w-fit">
-                            <ModalAddProject 
-                              props={{
-                                projectTagOptions,
-                                setProjectSearchQuery,
-                                setProjectInputValue,
-                                setProjectSelectedTagFilter,
-                                createProject,
-                                editProject
-                              }}
-                            />
-                          </div>
-                        }
-                      </div>
-                    </div>
-                    <ProjectTable 
-                      props={{
-                        projects,
-                        totalProject,
-                        pageProject,
-                        limitProject,
-                        projectSortIsAscending,
-                        projectSelectedSort,
-                        projectInputValue,
-                        projectSearchQuery,
-                        projectSelectedTagFilter,
-                        projectTagOptions,
-                        setPageProject,
-                        setProjectSearchQuery,
-                        setProjectInputValue,
-                        setProjectSelectedTagFilter,
-                        getProjectList,
-                        createProject,
-                        editProject,
-                        deleteProject
-                      }}
-                    />
-                  </>
-                  : <RestrictedPage />
-              }
-            </>
-            : <div className="flex flex-col justify-between w-full h-full">
-              <Image
-                src={Images.mandalaChainLoader}
-                alt="Loader"
-                width={100}
-                height={100}
-                className="m-auto"
-              />
-            </div>
-        }
+                    )}
+                  </div>
+                </div>
+                <AccountTable
+                  props={{
+                    accounts,
+                    totalAccount,
+                    pageAccount,
+                    limitAccount,
+                    accountSortIsAscending,
+                    accountSelectedSort,
+                    accountInputValue,
+                    accountSearchQuery,
+                    accountSelectedRoleFilter,
+                    accountRoleOptions,
+                    loadingStatus,
+                    selectedAccount,
+                    setPageAccount,
+                    setAccountSearchQuery,
+                    setAccountInputValue,
+                    setAccountSelectedRoleFilter,
+                    getAccountList,
+                    createAccount,
+                    editAccountRole,
+                    activateAccount,
+                    deactivateAccount,
+                    deleteAccount,
+                  }}
+                />
+              </>
+            ) : (
+              <RestrictedPage />
+            )}
+          </>
+        ) : (
+          <div className="flex flex-col justify-between w-full h-full">
+            <Image
+              src={Images.mandalaChainLoader}
+              alt="Loader"
+              width={100}
+              height={100}
+              className="m-auto"
+            />
+          </div>
+        )}
       </div>
     </main>
   );

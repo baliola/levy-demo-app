@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import type { ReactElement } from "react";
 
 export const metadata: Metadata = {
-  title: "Account | Mandala Hub CMS"
+  title: "Project | Mandala Hub CMS"
 };
 
-export default function AccountLayout ({
+export default function ProjectLayout ({
   children,
 }: Readonly<{
   children: React.ReactNode;

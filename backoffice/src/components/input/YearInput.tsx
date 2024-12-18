@@ -1,7 +1,7 @@
 import type { FormikErrors } from "formik";
 import { type ReactElement, useState } from "react";
 import { IoMdCalendar } from "react-icons/io";
-import type { IProjectValues } from "@/src/app/dashboard/levy/components/ProjectForm";
+import type { IProjectValues } from "@/src/app/dashboard/project/components/ProjectForm";
 
 interface IYearInputProps {
   value: number;

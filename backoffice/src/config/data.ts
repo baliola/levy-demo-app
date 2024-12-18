@@ -37,17 +37,9 @@ export const navigation: INavigationItem[] = [
     href: "/dashboard/levy",
     blank: false,
     current: false,
-    icon: FolderIcon,
-    permission: PermissionName.PERMISSION_BACKOFFICE_SHOW_PROJECT,
+    icon: UserGroupIcon,
+    permission: PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT,
   },
-  // {
-  //   name: "account",
-  //   href: "/dashboard/account",
-  //   blank: false,
-  //   current: false,
-  //   icon: UserGroupIcon,
-  //   permission: PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
-  // },
 ];
 
 export const forbiddenPage = {

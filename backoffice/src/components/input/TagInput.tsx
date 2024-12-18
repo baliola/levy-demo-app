@@ -2,7 +2,7 @@ import type { FormikErrors } from "formik";
 import { type ReactElement, useState } from "react";
 import { LuListFilter, LuPlus } from "react-icons/lu";
 import { RxCrossCircled } from "react-icons/rx";
-import type { IProjectValues } from "@/src/app/dashboard/levy/components/ProjectForm";
+import type { IProjectValues } from "@/src/app/dashboard/project/components/ProjectForm";
 
 interface ITagInputProps {
   values: string[];
