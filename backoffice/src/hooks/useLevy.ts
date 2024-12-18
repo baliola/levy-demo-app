@@ -16,6 +16,8 @@ const levyService = new LevyService();
 
 export const useLevy = () => {
   const [loading, setLoading] = useState(false);
+  const [loadingSearch, setLoadingSearch] = useState(false);
+
   const [totalSummary, setTotalSummary] = useState<TotalDataLevy | null>(null);
   const [levyList, setLevyList] = useState<LevyData[] | null>(null);
   const [pageLevy, setPageLevy] = useState(1);
@@ -23,17 +25,39 @@ export const useLevy = () => {
   const [totalLevy, setTotalLevy] = useState(0);
   const [selectedLevy, setSelectedLevy] = useState(0);
   const [levyDetail, setLevyDetail] = useState<DataDetailLevy | null>(null);
+  const [levySortIsAscending, setlevySortIsAscending] = useState(true);
+  const [levyInputValue, setLevyInputValue] = useState("");
+  const [levySearchQuery, setLevySearchQuery] = useState("");
+  const [levySelectedSort, setLevySelectedSort] = useState("");
 
   const fetchLevyList = async (): Promise<void> => {
     const params: IBaseRequestParams = {
       page: pageLevy ?? 1,
       limit: limitLevy,
       order: "DESC",
-      search: "",
-      filter: "",
+      search: levySearchQuery,
+      filter: levySelectedSort,
       sort: "",
     };
     // setLoading(true);
+    try {
+      const response = await levyService.getLevyList(params);
+      console.log("response levy list", response.data.currentPage);
+      setPageLevy(response.data.currentPage);
+      setTotalLevy(response.data.total);
+      setLevyList(response.data.datas);
+      setLoading(false);
+      //   return response;
+    } catch (error) {
+      const err = error as Error;
+      //   toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getLevyList = async (params: IBaseRequestParams): Promise<void> => {
+    setLoading(true);
     try {
       const response = await levyService.getLevyList(params);
       console.log("response levy list", response.data.currentPage);
@@ -99,6 +123,9 @@ export const useLevy = () => {
     totalLevy,
     selectedLevy,
     levyDetail,
+    levySearchQuery,
+    levyInputValue,
+    setLevyInputValue,
     setLevyDetail,
     setLimitLevy,
     setPageLevy,
@@ -108,5 +135,13 @@ export const useLevy = () => {
     fetchLevyList,
     fetchLevyDetail,
     fetchTotalLevy,
+    levySortIsAscending,
+    setlevySortIsAscending,
+    setLevySearchQuery,
+    levySelectedSort,
+    getLevyList,
+    setLevySelectedSort,
+    loadingSearch,
+    setLoadingSearch,
   };
 };

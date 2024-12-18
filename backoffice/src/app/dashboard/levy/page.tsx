@@ -19,6 +19,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { useLevy } from "@/src/hooks/useLevy";
 import { LevyTable } from "./components/LevyTable";
+import { SearchLevy } from "./components/SearchLevy";
 
 export default function Account(): ReactElement {
   const {
@@ -35,8 +36,18 @@ export default function Account(): ReactElement {
     setPageLevy,
     setSelectedLevy,
     setTotalLevy,
+    levySearchQuery,
     totalLevy,
     totalSummary,
+    levySortIsAscending,
+    levyInputValue,
+    levySelectedSort,
+    levyDetail,
+    setLevyInputValue,
+    setLevySearchQuery,
+    getLevyList,
+    loadingSearch,
+    setLoadingSearch,
   } = useLevy();
 
   useEffect(() => {
@@ -75,18 +86,74 @@ export default function Account(): ReactElement {
           </div>
 
           <>
-            <div className="flex flex-col lg:flex-row gap-3 items-end"></div>
+            <div className="flex flex-col lg:flex-row gap-3 items-end">
+              <div className="w-full">
+                <SearchLevy
+                  props={{
+                    limitLevy,
+                    levySortIsAscending,
+                    levySelectedSort,
+                    levyInputValue,
+                    levySearchQuery,
+                    setLevyInputValue,
+                    setLevySearchQuery,
+                    getLevyList,
+                    loading,
+                  }}
+                />
+              </div>
+              <div className="w-full flex gap-3 items-end">
+                <div className="grow">
+                  {/* <FilterAccount
+                    props={{
+                      limitAccount,
+                      accountSortIsAscending,
+                      accountSelectedSort,
+                      accountSearchQuery,
+                      accountSelectedRoleFilter,
+                      accountRoleOptions,
+                      showFilterRoleModal,
+                      setAccountSelectedRoleFilter,
+                      setShowFilterRoleModal,
+                      getAccountList,
+                    }} */}
+                  {/* /> */}
+                </div>
+                <div className="grow">
+                  {/* <SortAccount
+                    props={{
+                      pageAccount,
+                      limitAccount,
+                      accountSortIsAscending,
+                      accountSortOptions,
+                      accountSelectedSort,
+                      accountSearchQuery,
+                      accountSelectedRoleFilter,
+                      showSortModal,
+                      setAccountSortIsAscending,
+                      setAccountSelectedSort,
+                      setShowSortModal,
+                      getAccountList,
+                    }}
+                  /> */}
+                </div>
+              </div>
+            </div>{" "}
             {!loading ? (
               <LevyTable
                 props={{
                   levyList,
+                  levySortIsAscending,
+                  levySelectedSort,
+                  levyInputValue,
+                  levySearchQuery,
                   totalLevy,
                   pageLevy,
                   limitLevy,
                   loading,
                   selectedLevy,
                   setPageLevy,
-                  fetchLevyList,
+                  getLevyList,
                 }}
               />
             ) : (

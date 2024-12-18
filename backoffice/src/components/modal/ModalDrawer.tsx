@@ -41,7 +41,7 @@ const ModalDrawer = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Panel className="w-full sm:w-1/2 xl:w-[40%] transform lg:rounded-l-3xl p-6 text-left align-right bg-white  transition-all">
+              <Dialog.Panel className="w-full sm:w-1/2 xl:w-1/2 transform lg:rounded-l-3xl p-6 text-left align-right bg-white  transition-all">
                 {children}
               </Dialog.Panel>
             </Transition.Child>

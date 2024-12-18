@@ -62,10 +62,10 @@ const LevyDetail = ({ id }: { id: string }): React.ReactElement => {
           </div>
 
           {/* Signature */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="text-sm font-semibold">Signature:</label>
             <p className="text-gray-700 break-words">{levyDetail.signature}</p>
-          </div>
+          </div> */}
 
           {/* Transaction Histories */}
           <div>

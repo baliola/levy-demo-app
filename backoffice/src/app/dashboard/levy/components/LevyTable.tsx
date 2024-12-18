@@ -20,7 +20,10 @@ import type {
   IEditAccountRolePayload,
   IParamsAccountList,
 } from "@/src/interfaces/account.interface";
-import type { LevyData } from "@/src/interfaces/levy.interface";
+import type {
+  IBaseRequestParams,
+  LevyData,
+} from "@/src/interfaces/levy.interface";
 import { dummyResponse } from "@/src/interfaces/levy.interface";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
@@ -30,30 +33,14 @@ interface ILevyTableProps {
   totalLevy: number;
   pageLevy: number;
   limitLevy: number;
-  // levyortIsAscending: boolean;
-  // accountSelectedSort: string;
-  // accountInputValue: string;
-  // accountSearchQuery: string;
-  // accountSelectedRoleFilter: IAccountRoleData;
+  levySortIsAscending: boolean;
+  levySelectedSort: string;
+  levySearchQuery: string;
+  levyInputValue: string;
   loading: boolean;
   selectedLevy: number;
   setPageLevy: Dispatch<SetStateAction<number>>;
-  // setAccountSearchQuery: Dispatch<SetStateAction<string>>;
-  // setAccountInputValue: Dispatch<SetStateAction<string>>;
-  // setAccountSelectedRoleFilter: Dispatch<SetStateAction<IAccountRoleData>>;
-  fetchLevyList: (params: IParamsAccountList) => Promise<void>;
-  // editAccountRole: (id: string, data: IEditAccountRolePayload) => Promise<void>;
-  // activateAccount: (
-  //   id: string,
-  //   accounts: IAccountData[],
-  //   index: number
-  // ) => Promise<void>;
-  // deactivateAccount: (
-  //   id: string,
-  //   accounts: IAccountData[],
-  //   index: number
-  // ) => Promise<void>;
-  // deleteAccount: (id: string) => Promise<void>;
+  getLevyList: (params: IBaseRequestParams) => Promise<void>;
 }
 
 export const LevyTable = ({
@@ -62,13 +49,17 @@ export const LevyTable = ({
   props: ILevyTableProps;
 }): ReactElement => {
   const {
-    fetchLevyList,
+    getLevyList,
     totalLevy,
     pageLevy,
     limitLevy,
     loading,
     setPageLevy,
     levyList,
+    levySortIsAscending,
+    levySelectedSort,
+    levyInputValue,
+    levySearchQuery,
   } = props;
 
   const { userLoggedIn } = useCentralStore();
@@ -143,14 +134,14 @@ export const LevyTable = ({
   );
 
   const changePageHandler = (value: number): void => {
-    // getAccountList({
-    //   page: value,
-    //   limit: limitLevy,
-    //   order: levyortIsAscending ? "asc" : "desc",
-    //   sort: levyelectedSort,
-    //   search: levyearchQuery,
-    //   filter: levyelectedRoleFilter.name,
-    // });
+    getLevyList({
+      page: value,
+      limit: limitLevy,
+      order: levySortIsAscending ? "asc" : "desc",
+      sort: levySelectedSort,
+      search: levySearchQuery,
+      // filter: levyelectedRoleFilter.name,
+    });
   };
 
   return (
@@ -161,8 +152,8 @@ export const LevyTable = ({
         columns: accountColumn as ColumnDef<ColumnDefTypes>[],
         isCommon: true,
         isLoading: false,
-        currentPage: 1,
-        limitPage: 10,
+        currentPage: pageLevy,
+        limitPage: limitLevy,
         totalPage: Math.ceil(totalLevy / limitLevy),
         setCurrentPage: setPageLevy,
         changePageHandler,
