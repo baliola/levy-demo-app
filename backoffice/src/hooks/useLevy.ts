@@ -30,12 +30,12 @@ export const useLevy = () => {
       filter: "",
       sort: "",
     };
-    setLoading(true);
+    // setLoading(true);
     try {
       const response = await levyService.getLevyList(params);
-      console.log("response levy list", response);
-      setPageLevy(response.currentPage);
-      setTotalLevy(response.total);
+      console.log("response levy list", response.data.currentPage);
+      setPageLevy(response.data.currentPage);
+      setTotalLevy(response.data.total);
       setLevyList(response.data.datas);
       setLoading(false);
       //   return response;

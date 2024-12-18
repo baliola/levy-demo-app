@@ -25,6 +25,10 @@ export interface ILevyServices<Response> {
 
 export interface LevyDatas {
   datas: LevyData[];
+  total: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
 }
 export type LevyData = {
   id: string;
