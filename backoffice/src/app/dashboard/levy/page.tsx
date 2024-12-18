@@ -111,59 +111,7 @@ export default function Account(): ReactElement {
               PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
             ) ? (
               <>
-                <div className="flex flex-col lg:flex-row gap-3 items-end">
-                  <div className="w-full">
-                    <SearchAccount
-                      props={{
-                        limitAccount,
-                        accountSortIsAscending,
-                        accountSelectedSort,
-                        accountSelectedRoleFilter,
-                        accountInputValue,
-                        accountSearchQuery,
-                        setAccountInputValue,
-                        setAccountSearchQuery,
-                        getAccountList,
-                      }}
-                    />
-                  </div>
-                  <div className="w-full flex gap-3 items-end">
-                    <div className="grow">
-                      <FilterAccount
-                        props={{
-                          limitAccount,
-                          accountSortIsAscending,
-                          accountSelectedSort,
-                          accountSearchQuery,
-                          accountSelectedRoleFilter,
-                          accountRoleOptions,
-                          showFilterRoleModal,
-                          setAccountSelectedRoleFilter,
-                          setShowFilterRoleModal,
-                          getAccountList,
-                        }}
-                      />
-                    </div>
-                    <div className="grow">
-                      <SortAccount
-                        props={{
-                          pageAccount,
-                          limitAccount,
-                          accountSortIsAscending,
-                          accountSortOptions,
-                          accountSelectedSort,
-                          accountSearchQuery,
-                          accountSelectedRoleFilter,
-                          showSortModal,
-                          setAccountSortIsAscending,
-                          setAccountSelectedSort,
-                          setShowSortModal,
-                          getAccountList,
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <div className="flex flex-col lg:flex-row gap-3 items-end"></div>
                 <AccountTable
                   props={{
                     accounts,
