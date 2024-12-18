@@ -1,6 +1,9 @@
 import type { Dispatch, ReactElement, SetStateAction } from "react";
 import { CiEdit } from "react-icons/ci";
+import { FaRegEye } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
+import { AccountForm } from "./AccountForm";
+import LevyDetail from "./LevyDetail";
 import ModalDrawer from "@/src/components/modal/ModalDrawer";
 import useAccount from "@/src/hooks/useAccount";
 import type {
@@ -9,19 +12,16 @@ import type {
   ICreateAccountPayload,
   IEditAccountRolePayload,
 } from "@/src/interfaces/account.interface";
-import { AccountForm } from "./AccountForm";
-import { FaRegEye } from "react-icons/fa";
-import LevyDetail from "./LevyDetail";
+import type { LevyData } from "@/src/interfaces/levy.interface";
 import { dummyResponseDetail } from "@/src/interfaces/levy.interface";
 
 interface IModalEditAccountProps {
-  accountRoleOptions: IAccountRoleData[];
-  data: IAccountData;
-  setAccountSearchQuery: Dispatch<SetStateAction<string>>;
-  setAccountInputValue: Dispatch<SetStateAction<string>>;
-  setAccountSelectedRoleFilter: Dispatch<SetStateAction<IAccountRoleData>>;
-  createAccount: (data: ICreateAccountPayload) => Promise<void>;
-  editAccountRole: (id: string, data: IEditAccountRolePayload) => Promise<void>;
+  data: LevyData;
+  // setAccountSearchQuery: Dispatch<SetStateAction<string>>;
+  // setAccountInputValue: Dispatch<SetStateAction<string>>;
+  // setAccountSelectedRoleFilter: Dispatch<SetStateAction<IAccountRoleData>>;
+  // createAccount: (data: ICreateAccountPayload) => Promise<void>;
+  // editAccountRole: (id: string, data: IEditAccountRolePayload) => Promise<void>;
 }
 
 export const ModalEditAccount = ({
@@ -30,13 +30,13 @@ export const ModalEditAccount = ({
   props: IModalEditAccountProps;
 }): ReactElement => {
   const {
-    accountRoleOptions,
+    // accountRoleOptions,
     data,
-    setAccountSearchQuery,
-    setAccountInputValue,
-    setAccountSelectedRoleFilter,
-    createAccount,
-    editAccountRole,
+    // setAccountSearchQuery,
+    // setAccountInputValue,
+    // setAccountSelectedRoleFilter,
+    // createAccount,
+    // editAccountRole,
   } = props;
 
   const { toggleModalAccount, showModalAccount } = useAccount();

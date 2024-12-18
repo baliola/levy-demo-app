@@ -1,5 +1,5 @@
-import { DataDetailLevy } from "@/src/interfaces/levy.interface";
 import React from "react";
+import type { DataDetailLevy } from "@/src/interfaces/levy.interface";
 
 const LevyDetail = ({ data }: { data: DataDetailLevy }): React.ReactElement => {
   return (
@@ -38,7 +38,7 @@ const LevyDetail = ({ data }: { data: DataDetailLevy }): React.ReactElement => {
       <div className="mb-4">
         <label className="text-sm font-semibold">Levy Status:</label>
         <p
-          className={`text-white px-3 py-1 rounded ${
+          className={`text-white px-3 py-1 max-w-24 rounded ${
             data.levy.levy_status === "UNPAID" ? "bg-red-500" : "bg-green-500"
           }`}
         >

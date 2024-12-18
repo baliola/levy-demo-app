@@ -86,64 +86,58 @@ export default function Account(): ReactElement {
   return (
     <main className="overflow-x-hidden min-h-[calc(100vh-6rem)]">
       <div className="p-6 sm:p-8 lg:p-12 flex flex-col gap-y-6 lg:gap-y-10 h-full">
-        {userLoggedIn !== undefined ? (
+        {/* {userLoggedIn !== undefined ? ( */}
+        <>
+          <div className="flex flex-col gap-y-4 sm:grid sm:grid-cols-2 sm:gap-x-2">
+            <StatItem
+              props={{
+                name: `Total Retribution`,
+                icon: FaRegCheckCircle,
+                value: "1000",
+                isTime: true,
+              }}
+            />{" "}
+            <StatItem
+              props={{
+                name: `Total Paid`,
+                icon: ImCancelCircle,
+                value: "10",
+                isTime: true,
+              }}
+            />{" "}
+          </div>
+
           <>
-            <div className="flex flex-col gap-y-4 sm:grid sm:grid-cols-2 sm:gap-x-2">
-              <StatItem
-                props={{
-                  name: `Paid`,
-                  icon: FaRegCheckCircle,
-                  value: "1000",
-                  isTime: true,
-                }}
-              />{" "}
-              <StatItem
-                props={{
-                  name: `Unpaid`,
-                  icon: ImCancelCircle,
-                  value: "10",
-                  isTime: true,
-                }}
-              />{" "}
-            </div>
-            {checkUserPermission(
-              userLoggedIn,
-              PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
-            ) ? (
-              <>
-                <div className="flex flex-col lg:flex-row gap-3 items-end"></div>
-                <AccountTable
-                  props={{
-                    accounts,
-                    totalAccount,
-                    pageAccount,
-                    limitAccount,
-                    accountSortIsAscending,
-                    accountSelectedSort,
-                    accountInputValue,
-                    accountSearchQuery,
-                    accountSelectedRoleFilter,
-                    accountRoleOptions,
-                    loadingStatus,
-                    selectedAccount,
-                    setPageAccount,
-                    setAccountSearchQuery,
-                    setAccountInputValue,
-                    setAccountSelectedRoleFilter,
-                    getAccountList,
-                    createAccount,
-                    editAccountRole,
-                    activateAccount,
-                    deactivateAccount,
-                    deleteAccount,
-                  }}
-                />
-              </>
-            ) : (
-              <RestrictedPage />
-            )}
+            <div className="flex flex-col lg:flex-row gap-3 items-end"></div>
+            <AccountTable
+              props={{
+                accounts,
+                totalAccount,
+                pageAccount,
+                limitAccount,
+                accountSortIsAscending,
+                accountSelectedSort,
+                accountInputValue,
+                accountSearchQuery,
+                accountSelectedRoleFilter,
+                accountRoleOptions,
+                loadingStatus,
+                selectedAccount,
+                setPageAccount,
+                setAccountSearchQuery,
+                setAccountInputValue,
+                setAccountSelectedRoleFilter,
+                getAccountList,
+                createAccount,
+                editAccountRole,
+                activateAccount,
+                deactivateAccount,
+                deleteAccount,
+              }}
+            />
           </>
-        ) : (
+        </>
+        {/* ) : (
           <div className="flex flex-col justify-between w-full h-full">
             <Image
               src={Images.mandalaChainLoader}
@@ -153,7 +147,7 @@ export default function Account(): ReactElement {
               className="m-auto"
             />
           </div>
-        )}
+        )} */}
       </div>
     </main>
   );

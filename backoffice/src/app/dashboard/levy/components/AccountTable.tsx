@@ -70,12 +70,10 @@ export const AccountTable = ({
     limitAccount,
     accountSortIsAscending,
     accountSelectedSort,
-    accountInputValue,
     accountSearchQuery,
     accountSelectedRoleFilter,
     accountRoleOptions,
     loadingStatus,
-    selectedAccount,
     setPageAccount,
     setAccountSearchQuery,
     setAccountInputValue,
@@ -83,9 +81,6 @@ export const AccountTable = ({
     getAccountList,
     createAccount,
     editAccountRole,
-    activateAccount,
-    deactivateAccount,
-    deleteAccount,
   } = props;
 
   const { userLoggedIn } = useCentralStore();
@@ -138,35 +133,19 @@ export const AccountTable = ({
         header: "Action",
         cell: (info): ReactElement => (
           <>
-            {checkUserPermission(
-              userLoggedIn,
-              PermissionName.PERMISSION_BACKOFFICE_UPDATE_ACCOUNT
-            ) ||
-            checkUserPermission(
-              userLoggedIn,
-              PermissionName.PERMISSION_BACKOFFICE_DELETE_ACCOUNT
-            ) ? (
-              <div className="flex lg:grid lg:grid-cols-1 lg:min-w-16 gap-x-1 border-l ml-1 drop-shadow-action-column px-3 py-2 justify-center">
-                {checkUserPermission(
-                  userLoggedIn,
-                  PermissionName.PERMISSION_BACKOFFICE_UPDATE_ACCOUNT
-                ) && (
-                  <ModalEditAccount
-                    props={{
-                      accountRoleOptions,
-                      data: info.row.original.id,
-                      setAccountSearchQuery,
-                      setAccountInputValue,
-                      setAccountSelectedRoleFilter,
-                      createAccount,
-                      editAccountRole,
-                    }}
-                  />
-                )}
-              </div>
-            ) : (
-              <div className="text-black text-center">-</div>
-            )}
+            <div className="flex lg:grid lg:grid-cols-1 lg:min-w-16 gap-x-1 border-l ml-1 drop-shadow-action-column px-3 py-2 justify-center">
+              <ModalEditAccount
+                props={{
+                  // accountRoleOptions,
+                  data: info.row.original,
+                  // setAccountSearchQuery,
+                  // setAccountInputValue,
+                  // setAccountSelectedRoleFilter,
+                  // createAccount,
+                  // editAccountRole,
+                }}
+              />
+            </div>
           </>
         ),
       },

@@ -16,22 +16,19 @@ import RedirectList from "./sidebar/RedirectList";
 import { useCentralStore } from "../store";
 
 const Sidebar = (): ReactElement => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const {
-    isSidebarOpen,
-    setIsSidebarOpen,
-    setUserLoggedIn,
-  } = useCentralStore();
+  const { isSidebarOpen, setIsSidebarOpen, setUserLoggedIn } =
+    useCentralStore();
 
   const handleLogout = (): void => {
-    deleteCookie('accessToken')
-    router.push('/auth/login')
+    deleteCookie("accessToken");
+    router.push("/auth/login");
 
     setTimeout(() => {
-      setUserLoggedIn(null)
-    }, 1000)
-  }
+      setUserLoggedIn(null);
+    }, 1000);
+  };
 
   return (
     <>
@@ -72,16 +69,15 @@ const Sidebar = (): ReactElement => {
                 <div className="flex flex-col gap-y-3">
                   <RedirectList />
                 </div>
-                <div className="flex mt-auto justify-between items-center gap-x-4">
-                </div>
+                <div className="flex mt-auto justify-between items-center gap-x-4"></div>
               </nav>
               <div className="w-full px-2">
-                <button 
+                <button
                   type="button"
                   className="w-full flex gap-x-3 rounded-md p-2 text-base font-medium leading-6 capitalize text-red-600"
                   onClick={handleLogout}
                 >
-                  <CiLogout className="h-6 w-6 shrink-0"/>
+                  <CiLogout className="h-6 w-6 shrink-0" />
                   <span>Logout</span>
                 </button>
               </div>
@@ -102,12 +98,12 @@ const Sidebar = (): ReactElement => {
               </div>
             </div>
             <div className="w-full">
-              <button 
+              <button
                 type="button"
                 className="w-full flex gap-x-3 rounded-md p-2 text-base font-medium leading-6 capitalize text-red-600"
                 onClick={handleLogout}
               >
-                <CiLogout className="h-6 w-6 shrink-0"/>
+                <CiLogout className="h-6 w-6 shrink-0" />
                 <span>Logout</span>
               </button>
             </div>
