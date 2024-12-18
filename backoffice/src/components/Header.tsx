@@ -9,9 +9,7 @@ import { getPageName } from "../utils";
 const Header = (): ReactElement => {
   const pathname = usePathname();
 
-  const {
-    setIsSidebarOpen,
-  } = useCentralStore();
+  const { setIsSidebarOpen } = useCentralStore();
 
   return (
     <header className="sticky w-full overflow-hidden top-0 z-[80] flex h-24 shrink-0 items-center gap-x-4 border-b border-gray-300 bg-white px-8 shadow-sm sm:gap-x-6 lg:px-0 lg:py-8">
@@ -25,14 +23,11 @@ const Header = (): ReactElement => {
       </button>
 
       {/* Separator */}
-      <div
-        aria-hidden="true"
-        className="h-6 w-px bg-gray-900/30 lg:hidden "
-      />
+      <div aria-hidden="true" className="h-6 w-px bg-gray-900/30 lg:hidden " />
 
       <div className="flex flex-1 gap-x-4 items-center lg:gap-x-6 lg:px-8">
         <h1 className="text-primary capitalize font-semibold text-2xl flex">
-          {getPageName(pathname)}
+          Levy Report
         </h1>
       </div>
     </header>
