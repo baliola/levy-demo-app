@@ -18,7 +18,6 @@ import type {
   IEditAccountRolePayload,
 } from "@/src/interfaces/account.interface";
 import type { LevyData } from "@/src/interfaces/levy.interface";
-import { dummyResponseDetail } from "@/src/interfaces/levy.interface";
 import { useLevy } from "@/src/hooks/useLevy";
 
 interface IModalEditAccountProps {

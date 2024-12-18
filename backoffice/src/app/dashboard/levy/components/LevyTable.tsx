@@ -24,9 +24,14 @@ import type {
   IBaseRequestParams,
   LevyData,
 } from "@/src/interfaces/levy.interface";
-import { dummyResponse } from "@/src/interfaces/levy.interface";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
+import {
+  formatDate,
+  formatDateRange,
+  formatDateRangeNew,
+  formatDateShort,
+} from "@/src/utils/date";
 
 interface ILevyTableProps {
   levyList: LevyData[] | null;
@@ -82,6 +87,29 @@ export const LevyTable = ({
         header: "E-Mail",
         cell: (info): ReactElement => (
           <span className="capitalize">{info.row.original.user.email}</span>
+        ),
+      },
+      {
+        header: "Created At ",
+        cell: (info): ReactElement => (
+          <span className="capitalize">
+            {info.row.original.created_at
+              ? formatDateRangeNew(info.row.original.created_at, false)
+              : "-"}
+          </span>
+        ),
+      },
+      {
+        header: "Expired Date",
+        cell: (info): ReactElement => (
+          <span className="capitalize">
+            {info.row.original.levy.levy_expired_at
+              ? formatDateRangeNew(
+                  info.row.original.levy.levy_expired_at,
+                  false
+                )
+              : "-"}
+          </span>
         ),
       },
       {

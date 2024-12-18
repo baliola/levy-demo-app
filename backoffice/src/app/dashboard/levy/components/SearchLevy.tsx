@@ -71,7 +71,7 @@ export const SearchLevy = ({
         <input
           id="search"
           type="text"
-          placeholder="Account email"
+          placeholder="Account name"
           value={levyInputValue}
           onChange={(e) => {
             setLevyInputValue(e.target.value);

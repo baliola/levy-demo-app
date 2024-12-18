@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import type { DataDetailLevy } from "@/src/interfaces/levy.interface";
 import { useLevy } from "@/src/hooks/useLevy";
+import { Skeleton } from "@/src/components/skeleton/Skeleton";
 
 const LevyDetail = ({ id }: { id: string }): React.ReactElement => {
-  const { levyDetail, fetchLevyDetail } = useLevy();
+  const { levyDetail, fetchLevyDetail, loading } = useLevy();
 
   useEffect(() => {
     // if (id) {
@@ -15,6 +16,7 @@ const LevyDetail = ({ id }: { id: string }): React.ReactElement => {
   useEffect(() => {}, []);
   return (
     <>
+      {/* {loading &&  flow} */}
       {levyDetail && (
         <div className="flex flex-col">
           {/* User Information */}

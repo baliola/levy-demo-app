@@ -61,7 +61,7 @@ export const FilterLevy = ({
           htmlFor="filterLevyByTag"
           className="font-semibold w-fit px-4 text-ellipsis overflow-hidden line-clamp-1"
         >
-          Filter by Role
+          Filter by Status
         </label>
       </div>
       <div

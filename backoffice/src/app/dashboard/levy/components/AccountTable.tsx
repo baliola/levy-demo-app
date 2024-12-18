@@ -21,7 +21,6 @@ import type {
   IParamsAccountList,
 } from "@/src/interfaces/account.interface";
 import type { LevyData } from "@/src/interfaces/levy.interface";
-import { dummyResponse } from "@/src/interfaces/levy.interface";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
 
@@ -168,7 +167,7 @@ export const AccountTable = ({
   return (
     <PaginationTable
       props={{
-        data: dummyResponse,
+        data: [],
         label: "Account",
         columns: accountColumn as ColumnDef<ColumnDefTypes>[],
         isCommon: true,
