@@ -14,12 +14,17 @@ export interface IBaseRequestParams {
   order?: string;
   search?: string;
   filter?: string;
+  sort?: string;
 }
 
 export interface ILevyServices<Response> {
   getLevyList(params: IBaseRequestParams): Promise<Response | void>;
   getLevyDetail(id: string): Promise<Response | void>;
   getTotalLevy(): Promise<Response>;
+}
+
+export interface LevyDatas {
+  datas: LevyData[];
 }
 export type LevyData = {
   id: string;
@@ -108,7 +113,7 @@ export const dummyResponse: LevyData[] = [
 ];
 
 export type ILevyDetailResponse = IApiResponse<LevyData>;
-export type ILevyListResponse = IApiResponse<LevyData[]>;
+export type ILevyListResponse = BaseResponse<LevyDatas>;
 export type ILevyTotalTotal = IApiResponse<TotalDataLevy[]>;
 
 export type ILevyResponse =

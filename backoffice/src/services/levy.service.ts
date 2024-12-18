@@ -14,9 +14,7 @@ export class LevyService implements ILevyServices<ILevyResponse> {
    * @param params - The parameters for filtering the levy list.
    * @returns A promise that resolves to the levy list or void in case of an error.
    */
-  async getLevyList(
-    params: IBaseRequestParams
-  ): Promise<ILevyListResponse | void> {
+  async getLevyList(params: IBaseRequestParams): Promise<ILevyListResponse> {
     try {
       const response = await ApiService.fetchData<ILevyListResponse>({
         method: "GET",
@@ -35,7 +33,7 @@ export class LevyService implements ILevyServices<ILevyResponse> {
    * @param id - The ID of the levy to fetch.
    * @returns A promise that resolves to the levy details or void in case of an error.
    */
-  async getLevyDetail(id: string): Promise<ILevyDetailResponse | void> {
+  async getLevyDetail(id: string): Promise<ILevyDetailResponse> {
     try {
       const response = await ApiService.fetchData<ILevyDetailResponse>({
         method: "GET",
@@ -56,7 +54,7 @@ export class LevyService implements ILevyServices<ILevyResponse> {
     try {
       const response = await ApiService.fetchData<ILevyTotalTotal>({
         method: "GET",
-        url: "/levy/total",
+        url: "/levy-total",
       });
 
       return response.data;

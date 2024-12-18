@@ -17,72 +17,31 @@ import StatItem from "./components/StatsItem";
 import { CiCircleCheck } from "react-icons/ci";
 import { ImCancelCircle } from "react-icons/im";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { useLevy } from "@/src/hooks/useLevy";
+import { LevyTable } from "./components/LevyTable";
 
 export default function Account(): ReactElement {
   const {
-    pageAccount,
-    limitAccount,
-    totalAccount,
-    accountSortIsAscending,
-    accountSelectedSort,
-    accountInputValue,
-    accountSearchQuery,
-    accountSelectedRoleFilter,
-    accounts,
-    accountRoleOptions,
-    accountSortOptions,
-    showFilterRoleModal,
-    showSortModal,
-    loadingStatus,
-    selectedAccount,
-    setPageAccount,
-    setAccountInputValue,
-    setAccountSearchQuery,
-    setAccountSelectedRoleFilter,
-    setAccountSortIsAscending,
-    setAccountSelectedSort,
-    setShowFilterRoleModal,
-    setShowSortModal,
-    getAccountList,
-    getAccountRoleOptions,
-    createAccount,
-    editAccountRole,
-    activateAccount,
-    deactivateAccount,
-    deleteAccount,
-    getAccountProfile,
-  } = useAccount();
-
-  const { userLoggedIn } = useCentralStore();
+    fetchLevyDetail,
+    fetchLevyList,
+    fetchTotalLevy,
+    levyList,
+    limitLevy,
+    loading,
+    pageLevy,
+    selectedLevy,
+    setLevyList,
+    setLimitLevy,
+    setPageLevy,
+    setSelectedLevy,
+    setTotalLevy,
+    totalLevy,
+    totalSummary,
+  } = useLevy();
 
   useEffect(() => {
-    if (userLoggedIn) {
-      if (
-        checkUserPermission(
-          userLoggedIn,
-          PermissionName.PERMISSION_BACKOFFICE_SHOW_ACCOUNT
-        )
-      ) {
-        getAccountRoleOptions();
-        getAccountList({
-          page: pageAccount,
-          limit: limitAccount,
-          sort: accountSelectedSort,
-          order: accountSortIsAscending ? "asc" : "desc",
-          search: accountSearchQuery,
-          filter: accountSelectedRoleFilter.name,
-        });
-      }
-    } else {
-      getAccountProfile();
-    }
-  }, [userLoggedIn]);
-
-  useEffect(() => {
-    if (accountSelectedRoleFilter.name !== "" || accountSearchQuery !== "")
-      setPageAccount(1);
-  }, [accountSelectedRoleFilter, accountSearchQuery]);
-
+    fetchLevyList();
+  }, [pageLevy]);
   return (
     <main className="overflow-x-hidden min-h-[calc(100vh-6rem)]">
       <div className="p-6 sm:p-8 lg:p-12 flex flex-col gap-y-6 lg:gap-y-10 h-full">
@@ -109,7 +68,31 @@ export default function Account(): ReactElement {
 
           <>
             <div className="flex flex-col lg:flex-row gap-3 items-end"></div>
-            <AccountTable
+            {!loading ? (
+              <LevyTable
+                props={{
+                  levyList,
+                  totalLevy,
+                  pageLevy,
+                  limitLevy,
+                  loading,
+                  selectedLevy,
+                  setPageLevy,
+                  fetchLevyList,
+                }}
+              />
+            ) : (
+              <div className="flex flex-col justify-between w-full h-full">
+                <Image
+                  src={Images.mandalaChainLoader}
+                  alt="Loader"
+                  width={100}
+                  height={100}
+                  className="m-auto"
+                />
+              </div>
+            )}
+            {/* <AccountTable
               props={{
                 accounts,
                 totalAccount,
@@ -134,7 +117,7 @@ export default function Account(): ReactElement {
                 deactivateAccount,
                 deleteAccount,
               }}
-            />
+            /> */}
           </>
         </>
         {/* ) : (
