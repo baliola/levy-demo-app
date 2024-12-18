@@ -54,7 +54,7 @@ export class LevyService implements ILevyServices<ILevyResponse> {
     try {
       const response = await ApiService.fetchData<ILevyTotalTotal>({
         method: "GET",
-        url: "/levy-total",
+        url: "/levy/levy-total",
       });
 
       return response.data;

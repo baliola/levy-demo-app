@@ -69,7 +69,8 @@ export const useLevy = () => {
     setLoading(true);
     try {
       const response = await levyService.getTotalLevy();
-      console.log("response", response.data);
+      console.log("response total summary", response.data);
+      setTotalSummary(response.data);
 
       //   if (response) {
       //     toast.success("Total levy data fetched successfully.");

@@ -42,6 +42,9 @@ export default function Account(): ReactElement {
   useEffect(() => {
     fetchLevyList();
   }, [pageLevy]);
+  useEffect(() => {
+    fetchTotalLevy();
+  }, []);
   return (
     <main className="overflow-x-hidden min-h-[calc(100vh-6rem)]">
       <div className="p-6 sm:p-8 lg:p-12 flex flex-col gap-y-6 lg:gap-y-10 h-full">
@@ -52,7 +55,9 @@ export default function Account(): ReactElement {
               props={{
                 name: `Total Retribution`,
                 icon: FaRegCheckCircle,
-                value: "1000",
+                value: totalSummary
+                  ? (totalSummary?.total_retribution as unknown as string)
+                  : "0",
                 isTime: true,
               }}
             />{" "}
@@ -60,7 +65,9 @@ export default function Account(): ReactElement {
               props={{
                 name: `Total Paid`,
                 icon: ImCancelCircle,
-                value: "10",
+                value: totalSummary
+                  ? (totalSummary?.total_paid as unknown as string)
+                  : "0",
                 isTime: true,
               }}
             />{" "}

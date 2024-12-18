@@ -2,6 +2,7 @@ import type { ReactElement } from "react";
 import { RxArrowUp } from "react-icons/rx";
 import { TbArrowsUpDown } from "react-icons/tb";
 import { VscLoading } from "react-icons/vsc";
+import { NumericFormat } from "react-number-format";
 
 interface IStatItemProps {
   name: string;
@@ -32,11 +33,30 @@ const StatItem = ({ props }: { props: IStatItemProps }): ReactElement => {
           {name}
         </span>
         {value ? (
-          <p
-            className={`text-2xl text-primary font-semibold transition-colors duration-500 truncate flex gap-x-1 `}
-          >
-            <span>{value}</span>
-          </p>
+          <>
+            {name.toLowerCase().includes("paid") ? (
+              <>
+                <NumericFormat
+                  type="text"
+                  displayType="text"
+                  value={value ?? "0"}
+                  prefix="Rp"
+                  thousandsGroupStyle="thousand"
+                  thousandSeparator=","
+                  className={`text-2xl text-primary font-semibold transition-colors duration-500 truncate flex gap-x-1 `}
+                />{" "}
+              </>
+            ) : (
+              <>
+                {" "}
+                <p
+                  className={`text-2xl text-primary font-semibold transition-colors duration-500 truncate flex gap-x-1 `}
+                >
+                  <span>{value}</span>
+                </p>
+              </>
+            )}
+          </>
         ) : (
           <VscLoading className="grow block h-6 w-6 text-primary transition-colors duration-500 animate-spin" />
         )}

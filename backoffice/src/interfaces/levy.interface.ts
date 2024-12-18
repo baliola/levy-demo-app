@@ -118,7 +118,7 @@ export const dummyResponse: LevyData[] = [
 
 export type ILevyDetailResponse = IApiResponse<LevyData>;
 export type ILevyListResponse = BaseResponse<LevyDatas>;
-export type ILevyTotalTotal = IApiResponse<TotalDataLevy[]>;
+export type ILevyTotalTotal = IApiResponse<TotalDataLevy>;
 
 export type ILevyResponse =
   | ILevyDetailResponse
