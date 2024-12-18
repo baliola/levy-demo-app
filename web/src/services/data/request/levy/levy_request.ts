@@ -11,3 +11,5 @@ type LevyRequest = {
     levy_status: string;
   };
 };
+
+export default LevyRequest;

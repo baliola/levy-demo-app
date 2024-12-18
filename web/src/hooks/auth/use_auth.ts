@@ -14,6 +14,7 @@ import { login as loginBridge } from "./auth_bridge";
 interface IUseAuth {
   login: UseMutateFunction<ApiResponse<Auth>, unknown, LoginRequest, unknown>;
   isLoadingLogin: boolean;
+  isLoginSuccess: boolean;
   account: Auth | undefined;
 }
 
@@ -22,29 +23,14 @@ export const useAuth = (): IUseAuth => {
 
   const { isDarkMode } = useCentralStore();
 
-  const { mutate: login, isLoading: isLoadingLogin } = useMutation(
-    loginBridge,
-    {
-      onSuccess: async (value) => {
-        showToast({
-          message: value.message,
-          status: "success",
-          isDark: isDarkMode,
-        });
-
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
-      },
-      onError: async (error: AxiosError<ApiResponse<Auth>> | any) => {
-        showToast({
-          message: error?.message,
-          status: "error",
-          isDark: isDarkMode,
-        });
-      },
-    }
-  );
+  const {
+    mutate: login,
+    isLoading: isLoadingLogin,
+    isSuccess: isLoginSuccess,
+  } = useMutation(loginBridge, {
+    onSuccess: async (value) => {},
+    onError: async (error: AxiosError<ApiResponse<Auth>> | any) => {},
+  });
 
   useEffect(() => {
     const authService = new AuthService();
@@ -55,5 +41,6 @@ export const useAuth = (): IUseAuth => {
     account,
     login,
     isLoadingLogin,
+    isLoginSuccess,
   };
 };

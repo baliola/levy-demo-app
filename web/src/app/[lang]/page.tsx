@@ -126,7 +126,7 @@ export default async function Home({
             />
             <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
             <div className="absolute inset-0 flex flex-col items-start justify-end text-white px-32 pb-10">
-              <h1 className="text-4xl font-bold mb-4">Exemption</h1>
+              <h1 className="text-4xl font-bold mb-4">Tourist Levy</h1>
               <p className="text-lg">
                 {`Understand the criteria and steps for foreign tourists to be
                 exempted from Bali's tourist levy. This includes exemption for
