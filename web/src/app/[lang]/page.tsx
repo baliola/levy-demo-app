@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Disclosure,
   DisclosureButton,
@@ -34,10 +35,6 @@ const navigation = {
     { name: "FAQ", href: "#" },
   ],
 };
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default async function Home({
   params: { lang },
@@ -82,12 +79,11 @@ export default async function Home({
                         key={item.name}
                         href={item.href}
                         aria-current={item.current ? "page" : undefined}
-                        className={classNames(
+                        className={`${
                           item.current
                             ? "border-b-2 text-black"
-                            : "dark:text-gray-300 text-black hover:border-b-2",
-                          " px-3 text-sm font-medium flex flex-col items-center justify-center"
-                        )}
+                            : "dark:text-gray-300 text-black hover:border-b-2"
+                        } px-3 text-sm font-medium flex flex-col items-center justify-center`}
                       >
                         {item.name}
                       </a>
@@ -107,12 +103,11 @@ export default async function Home({
                 as="a"
                 href={item.href}
                 aria-current={item.current ? "page" : undefined}
-                className={classNames(
+                className={`${
                   item.current
                     ? "bg-gray-900 text-white"
-                    : "dark:text-gray-300 text-black hover:bg-gray-700 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium"
-                )}
+                    : "dark:text-gray-300 text-black hover:bg-gray-700 hover:text-white"
+                } block rounded-md px-3 text-base font-medium`}
               >
                 {item.name}
               </DisclosureButton>
