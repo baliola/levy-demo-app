@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AxiosError, AxiosResponse } from "axios";
 import { setCookie } from "cookies-next";
-import type { IAuthService } from "./auth_service_interface";
 import { api } from "@/config/api";
 import CookieKey from "@/constants/cookie_key";
 import StorageKey from "@/constants/storageKey";
@@ -9,6 +8,7 @@ import type LoginRequest from "@/services/data/request/auth/login_request";
 import type ApiResponse from "@/services/data/response/api_base_response";
 import type Auth from "@/services/data/response/auth/auth";
 import LocalStorage from "@/services/storage/localStorage";
+import type { IAuthService } from "./auth_service_interface";
 
 export class AuthService implements IAuthService {
   getAccount(): Auth {
@@ -40,6 +40,9 @@ export class AuthService implements IAuthService {
 
       return response.data;
     } catch (error: AxiosError<ApiResponse<Auth>> | any) {
+      console.error("====================================");
+      console.error("ERROR LOGIN --> ", error);
+      console.error("====================================");
       console.error("====================================");
       console.error("ERROR LOGIN --> ", error.response.data.message);
       console.error("====================================");

@@ -28,7 +28,7 @@ const PrimaryButton = ({
         }}
         className={
           className +
-          " rounded-md bg-gray-900 w-full px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grabg-gray-900 flex flex-row items-center justify-center space-x-2 disabled:bg-orange-300 disabled:cursor-not-allowed hover:cursor-pointer"
+          " rounded-md bg-gray-900 w-full px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grabg-gray-900 flex flex-row items-center justify-center space-x-2 disabled:bg-gray-800 disabled:cursor-not-allowed hover:cursor-pointer"
         }
       >
         <p className="text-center">{label}</p>
@@ -65,7 +65,7 @@ const PrimaryButton = ({
       disabled={loading}
       className={
         className +
-        " rounded-md bg-gray-900 w-full px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grabg-gray-900 flex flex-row items-center justify-center space-x-2 disabled:bg-orange-300 disabled:cursor-not-allowed"
+        " rounded-md bg-gray-900 w-full px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grabg-gray-900 flex flex-row items-center justify-center space-x-2 disabled:bg-gray-800 disabled:cursor-not-allowed"
       }
     >
       <p>{label}</p>
