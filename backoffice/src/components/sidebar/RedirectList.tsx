@@ -7,7 +7,7 @@ import { checkUserPermission, classNames } from "@/src/utils";
 
 const RedirectList = (): ReactElement => {
   const pathname = usePathname();
-  const { userLoggedIn, setIsSidebarOpen } = useCentralStore()
+  const { userLoggedIn, setIsSidebarOpen } = useCentralStore();
 
   const getClassName = (pathname: string, href: string): string => {
     return classNames(
@@ -32,9 +32,7 @@ const RedirectList = (): ReactElement => {
       <item.icon
         aria-hidden="true"
         className={classNames(
-          pathname === item.href
-            ? ""
-            : "group-hover:text-primary",
+          pathname === item.href ? "" : "group-hover:text-primary",
           "h-6 w-6 shrink-0 text-primary"
         )}
       />
@@ -43,24 +41,25 @@ const RedirectList = (): ReactElement => {
 
   return (
     <ul role="list" className="space-y-3">
-      {navigation.filter((item) => (
-        !item.hidden
-      )).map((item) => (
-        <li key={item.name}>
-          {
-            checkUserPermission(userLoggedIn, item.permission ?? '') &&
+      {navigation
+        .filter((item) => !item.hidden)
+        .map((item) => (
+          <li key={item.name}>
+            {
               <Link
                 href={item.href}
                 className={getClassName(pathname, item.href)}
                 target={`${item.blank ? "_blank" : "_self"}`}
-                onClick={() => { setIsSidebarOpen(false) }}
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                }}
               >
                 {getIcon(item, pathname)}
                 {item.name}
               </Link>
-          }
-        </li>
-      ))}
+            }
+          </li>
+        ))}
     </ul>
   );
 };

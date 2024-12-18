@@ -1,25 +1,24 @@
-import type { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import type { Dispatch, ReactElement, SetStateAction} from 'react';
-import { useEffect, useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import type { IAccountData } from '@/src/interfaces/account.interface';
-import type { IProjectData } from '@/src/interfaces/project.interface';
-import { Skeleton } from '../skeleton/Skeleton';
+} from "@tanstack/react-table";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
+import { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import type { IAccountData } from "@/src/interfaces/account.interface";
+import type { IProjectData } from "@/src/interfaces/project.interface";
+import { Skeleton } from "../skeleton/Skeleton";
+import { LevyData } from "@/src/interfaces/levy.interface";
 
-export type ColumnDefTypes = 
-  IProjectData |
-  IAccountData
+export type ColumnDefTypes = IProjectData | IAccountData | LevyData;
 
 interface IPaginationTableProps {
   data: ColumnDefTypes[];
-  label: string
+  label: string;
   columns: ColumnDef<ColumnDefTypes>[];
   isCommon: boolean;
   isLoading: boolean;
@@ -29,10 +28,14 @@ interface IPaginationTableProps {
   searchQuery?: string;
   selectedFilter?: string;
   setCurrentPage: Dispatch<SetStateAction<number>>;
-  changePageHandler: (value: number) => void
-};
+  changePageHandler: (value: number) => void;
+}
 
-export const PaginationTable = ({ props }: { props: IPaginationTableProps}): ReactElement => {
+export const PaginationTable = ({
+  props,
+}: {
+  props: IPaginationTableProps;
+}): ReactElement => {
   const {
     data,
     label,
@@ -45,8 +48,8 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
     searchQuery,
     selectedFilter,
     setCurrentPage,
-    changePageHandler
-  } = props
+    changePageHandler,
+  } = props;
 
   const table = useReactTable({
     columns,
@@ -59,7 +62,10 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
 
   const [isClient, setIsClient] = useState(false);
 
-  const getPaginationButtons = (currentPage: number, totalPages: number): ReactElement[] => {
+  const getPaginationButtons = (
+    currentPage: number,
+    totalPages: number
+  ): ReactElement[] => {
     const maxButtons = 10;
     let startPage, endPage;
 
@@ -88,20 +94,22 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
         <button
           type="button"
           key={index}
-          className={`p-2 flex justify-center items-center text-primary border shadow aspect-square h-8 ${index === currentPage ? 'bg-gradient-active-sidebar' : 'bg-white'}`}
+          className={`p-2 flex justify-center items-center text-primary border shadow aspect-square h-8 ${
+            index === currentPage ? "bg-gradient-active-sidebar" : "bg-white"
+          }`}
           onClick={() => {
             setCurrentPage(index);
             table.setPageIndex(index);
-            changePageHandler(index)
+            changePageHandler(index);
           }}
         >
           {index}
         </button>
       );
     }
-    
+
     return pages;
-  }
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -109,112 +117,132 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
 
   return (
     <>
-      {
-        isClient && <div className="flex flex-col justify-between w-full">
+      {isClient && (
+        <div className="flex flex-col justify-between w-full">
           <div className="w-full overflow-x-auto">
-            {
-              !isLoading 
-                ? data.length <= 0
-                  ? searchQuery !== '' || selectedFilter !== ''
-                    ? <p className="text-center text-sm font-bold tracking-wider pt-3">{label} not found, please update search or filter</p>
-                    : <p className="text-center text-sm font-bold tracking-wider pt-3">No {label} has been created yet</p>
-                  : <table className="whitespace-nowrap w-full">
-                    <thead className="first:sticky">
-                      {
-                        table.getHeaderGroups().map((headerGroup, index) => (
-                          <tr key={index} className="sticky">
-                            {
-                              headerGroup.headers.map((header, indexHeader) => {
-                                return <th
-                                  className={`p-5 border-b-[3px] font-bold ${indexHeader === headerGroup.headers.length - 1 ? 'sticky' : '' } bg-white`}
-                                  key={indexHeader}
-                                  colSpan={header.colSpan}
-                                >
-                                  {
-                                    header.isPlaceholder 
-                                      ? null 
-                                      : <div className="text-left font-bold text-xs">
-                                        {flexRender(header.column.columnDef.header, header.getContext())}
-                                      </div>
-                                  }
-                                </th>
-                              })
-                            }
-                          </tr>
-                        ))
-                      }
-                    </thead>
-                    <tbody>
-                      {
-                        table.getRowModel().rows.map((row) => {
-                          return <tr
-                            className="border-y border-zinc-300 even:bg-gray-100 odd:bg-white"
-                            key={row.id}
-                          >
-                            {
-                              row.getVisibleCells().map((cell, index) => {
-                                return <td
-                                  className={`text-[16px] font-medium leading-normal w-fit lg:max-w-96 overflow-x-hidden text-ellipsis text-sm ${index === row.getVisibleCells().length - 1 ? 'sticky bg-inherit' : 'px-5 py-2' }`}
-                                  key={index}
-                                >
-                                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </td>
-                              })
-                            }
-                          </tr>
-                        })
-                      }
-                    </tbody>
-                  </table>
-                : <table className="whitespace-nowrap w-full">
+            {!isLoading ? (
+              data.length <= 0 ? (
+                searchQuery !== "" || selectedFilter !== "" ? (
+                  <p className="text-center text-sm font-bold tracking-wider pt-3">
+                    {label} not found, please update search or filter
+                  </p>
+                ) : (
+                  <p className="text-center text-sm font-bold tracking-wider pt-3">
+                    No {label} has been created yet
+                  </p>
+                )
+              ) : (
+                <table className="whitespace-nowrap w-full">
                   <thead className="first:sticky">
-                    {
-                      table.getHeaderGroups().map((headerGroup, index) => (
-                        <tr key={index} className="sticky">
-                          {
-                            headerGroup.headers.map((header, indexHeader) => {
-                              return <th
-                                className={`p-5 border-b-[3px] font-bold ${indexHeader === headerGroup.headers.length - 1 ? 'sticky' : '' } bg-white`}
-                                key={indexHeader}
-                                colSpan={header.colSpan}
-                              >
-                                {
-                                  header.isPlaceholder 
-                                    ? null 
-                                    : <div className="text-left font-bold text-xs">
-                                      {flexRender(header.column.columnDef.header, header.getContext())}
-                                    </div>
-                                }
-                              </th>
-                            })
-                          }
-                        </tr>
-                      ))
-                    }
+                    {table.getHeaderGroups().map((headerGroup, index) => (
+                      <tr key={index} className="sticky">
+                        {headerGroup.headers.map((header, indexHeader) => {
+                          return (
+                            <th
+                              className={`p-5 border-b-[3px] font-bold ${
+                                indexHeader === headerGroup.headers.length - 1
+                                  ? "sticky"
+                                  : ""
+                              } bg-white`}
+                              key={indexHeader}
+                              colSpan={header.colSpan}
+                            >
+                              {header.isPlaceholder ? null : (
+                                <div className="text-left font-bold text-xs">
+                                  {flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext()
+                                  )}
+                                </div>
+                              )}
+                            </th>
+                          );
+                        })}
+                      </tr>
+                    ))}
                   </thead>
                   <tbody>
-                    {
-                      Array.from({ length: limitPage }).map((_, index) => (
+                    {table.getRowModel().rows.map((row) => {
+                      return (
                         <tr
-                          key={index}
-                          className="border border-1 border-zinc-300 border-x-0"
+                          className="border-y border-zinc-300 even:bg-gray-100 odd:bg-white"
+                          key={row.id}
                         >
-                          {
-                            columns.map((_, index) =>
-                              <td key={index} className="px-5 py-2 text-[16px] h-12 font-medium leading-normal">
-                                <Skeleton.List />
+                          {row.getVisibleCells().map((cell, index) => {
+                            return (
+                              <td
+                                className={`text-[16px] font-medium leading-normal w-fit lg:max-w-96 overflow-x-hidden text-ellipsis text-sm ${
+                                  index === row.getVisibleCells().length - 1
+                                    ? "sticky bg-inherit"
+                                    : "px-5 py-2"
+                                }`}
+                                key={index}
+                              >
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext()
+                                )}
                               </td>
-                            )
-                          }
+                            );
+                          })}
                         </tr>
-                      ))
-                    }
+                      );
+                    })}
                   </tbody>
                 </table>
-            }
+              )
+            ) : (
+              <table className="whitespace-nowrap w-full">
+                <thead className="first:sticky">
+                  {table.getHeaderGroups().map((headerGroup, index) => (
+                    <tr key={index} className="sticky">
+                      {headerGroup.headers.map((header, indexHeader) => {
+                        return (
+                          <th
+                            className={`p-5 border-b-[3px] font-bold ${
+                              indexHeader === headerGroup.headers.length - 1
+                                ? "sticky"
+                                : ""
+                            } bg-white`}
+                            key={indexHeader}
+                            colSpan={header.colSpan}
+                          >
+                            {header.isPlaceholder ? null : (
+                              <div className="text-left font-bold text-xs">
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                              </div>
+                            )}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody>
+                  {Array.from({ length: limitPage }).map((_, index) => (
+                    <tr
+                      key={index}
+                      className="border border-1 border-zinc-300 border-x-0"
+                    >
+                      {columns.map((_, index) => (
+                        <td
+                          key={index}
+                          className="px-5 py-2 text-[16px] h-12 font-medium leading-normal"
+                        >
+                          <Skeleton.List />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
-          {
-            isCommon && totalPage > 0 && <div className="flex flex-row justify-end items-center gap-2 p-5">
+          {isCommon && totalPage > 0 && (
+            <div className="flex flex-row justify-end items-center gap-2 p-5">
               <div className="flex flex-row justify-center items-center gap-5 w-full">
                 {/* <span className="flex items-center justify-center gap-1">
                   <div className="text-right text-neutral-400 text-[12px] font-semibold uppercase tracking-wider">
@@ -227,7 +255,7 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
                     onClick={() => {
                       setCurrentPage(currentPage - 1);
                       table.previousPage();
-                      changePageHandler(currentPage - 1)
+                      changePageHandler(currentPage - 1);
                     }}
                     disabled={currentPage === 1 ? true : false}
                   >
@@ -239,7 +267,7 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
                     onClick={() => {
                       setCurrentPage(currentPage + 1);
                       table.nextPage();
-                      changePageHandler(currentPage + 1)
+                      changePageHandler(currentPage + 1);
                     }}
                     disabled={currentPage >= totalPage ? true : false}
                   >
@@ -248,9 +276,9 @@ export const PaginationTable = ({ props }: { props: IPaginationTableProps}): Rea
                 </div>
               </div>
             </div>
-          }
+          )}
         </div>
-      }
+      )}
     </>
   );
 };
