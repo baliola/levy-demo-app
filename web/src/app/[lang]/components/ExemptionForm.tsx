@@ -64,7 +64,7 @@ const ExemptionForm: React.FC = () => {
         {applicants.map((applicant, index) => (
           <div
             key={index}
-            className="bg-white xl:w-1/4 w-full  rounded-lg shadow-md p-4 mr-10 mb-10"
+            className="bg-white xl:w-1/4 w-full  rounded-lg shadow-sm ring-1 ring-gray-900/5 p-4 mr-10 mb-10"
           >
             <h2 className="text-lg font-bold mb-2">Applicant Detail</h2>
 

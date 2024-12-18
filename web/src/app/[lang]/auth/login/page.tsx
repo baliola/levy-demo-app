@@ -11,7 +11,7 @@ const LoginPage = async ({
   const t = await getDictionary(lang);
 
   return (
-    <div className="p-20 flex justify-center items-center w-full h-full">
+    <div className="p-20 flex justify-center items-center w-full h-full bg-gray-400">
       <LoginForm />
     </div>
   );
