@@ -42,6 +42,7 @@ export default function Account(): ReactElement {
   useEffect(() => {
     fetchLevyList();
   }, [pageLevy]);
+  console.log("levy", levyList);
   useEffect(() => {
     fetchTotalLevy();
   }, []);

@@ -138,6 +138,7 @@ export const AccountTable = ({
                 props={{
                   // accountRoleOptions,
                   data: info.row.original,
+                  id: info.row.original.id,
                   // setAccountSearchQuery,
                   // setAccountInputValue,
                   // setAccountSelectedRoleFilter,

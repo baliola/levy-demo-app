@@ -124,6 +124,7 @@ export const LevyTable = ({
             <div className="flex lg:grid lg:grid-cols-1 lg:min-w-16 gap-x-1 border-l ml-1 drop-shadow-action-column px-3 py-2 justify-center">
               <ModalEditAccount
                 props={{
+                  id: info.row.original.id,
                   // accountRoleOptions,
                   data: info.row.original,
                   // setlevyearchQuery,

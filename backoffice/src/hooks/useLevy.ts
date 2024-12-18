@@ -7,8 +7,10 @@ import type {
   ILevyListResponse,
   ILevyTotalTotal,
   LevyData,
+  DataDetailLevy,
   TotalDataLevy,
 } from "../interfaces/levy.interface";
+import LevyDetail from "../app/dashboard/levy/components/LevyDetail";
 
 const levyService = new LevyService();
 
@@ -20,6 +22,7 @@ export const useLevy = () => {
   const [limitLevy, setLimitLevy] = useState(10);
   const [totalLevy, setTotalLevy] = useState(0);
   const [selectedLevy, setSelectedLevy] = useState(0);
+  const [levyDetail, setLevyDetail] = useState<DataDetailLevy | null>(null);
 
   const fetchLevyList = async (): Promise<void> => {
     const params: IBaseRequestParams = {
@@ -53,13 +56,16 @@ export const useLevy = () => {
     setLoading(true);
     try {
       const response = await levyService.getLevyDetail(id);
-      if (response) {
-        toast.success("Levy details fetched successfully.");
-      }
+      console.log("Detail", response);
+      setLevyDetail(response.data);
+      //   if (response) {
+      //     toast.success("Levy details fetched successfully.");
+      //   }
       return response;
     } catch (error) {
       const err = error as Error;
-      toast.error(err.message);
+      console.log("errr", err);
+      //   toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -92,6 +98,8 @@ export const useLevy = () => {
     limitLevy,
     totalLevy,
     selectedLevy,
+    levyDetail,
+    setLevyDetail,
     setLimitLevy,
     setPageLevy,
     setLevyList,

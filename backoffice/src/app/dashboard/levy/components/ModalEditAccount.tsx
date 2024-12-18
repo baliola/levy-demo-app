@@ -1,4 +1,9 @@
-import type { Dispatch, ReactElement, SetStateAction } from "react";
+import {
+  useEffect,
+  type Dispatch,
+  type ReactElement,
+  type SetStateAction,
+} from "react";
 import { CiEdit } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
@@ -14,9 +19,11 @@ import type {
 } from "@/src/interfaces/account.interface";
 import type { LevyData } from "@/src/interfaces/levy.interface";
 import { dummyResponseDetail } from "@/src/interfaces/levy.interface";
+import { useLevy } from "@/src/hooks/useLevy";
 
 interface IModalEditAccountProps {
   data: LevyData;
+  id: string;
   // setAccountSearchQuery: Dispatch<SetStateAction<string>>;
   // setAccountInputValue: Dispatch<SetStateAction<string>>;
   // setAccountSelectedRoleFilter: Dispatch<SetStateAction<IAccountRoleData>>;
@@ -32,6 +39,7 @@ export const ModalEditAccount = ({
   const {
     // accountRoleOptions,
     data,
+    id,
     // setAccountSearchQuery,
     // setAccountInputValue,
     // setAccountSelectedRoleFilter,
@@ -40,6 +48,17 @@ export const ModalEditAccount = ({
   } = props;
 
   const { toggleModalAccount, showModalAccount } = useAccount();
+  // console.log("data detail", data.id);
+
+  // const { levyDetail, fetchLevyDetail } = useLevy();
+  // console.log("id", id);
+
+  // useEffect(() => {
+  //   // if (id) {
+  //   fetchLevyDetail(id);
+  //   return;
+  //   // }
+  // }, []);
 
   return (
     <>
@@ -64,7 +83,10 @@ export const ModalEditAccount = ({
               <RxCross2 className="text-red-500 w-6 h-6" />
             </button>
           </div>
-          <LevyDetail data={dummyResponseDetail} />
+          {/* {levyDetail && ( */}
+          <>
+            <LevyDetail id={id} />
+          </>
         </div>
       </ModalDrawer>
     </>
