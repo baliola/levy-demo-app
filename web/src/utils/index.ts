@@ -1,9 +1,8 @@
 /* eslint-disable indent */
-import { ethers } from "ethers";
+
 import type { ToastOptions } from "react-toastify";
 import { Bounce, toast } from "react-toastify";
 import type { Locale } from "@/app/[lang]/dictionaries";
-import { navigation } from "@/config/data";
 import StorageKey from "@/constants/storageKey";
 import LocalStorage from "@/services/storage/localStorage";
 import type { TypeToastStatus } from "@/types";
@@ -53,18 +52,6 @@ export const getPathname = (href: string): string => {
   return href.slice(3);
 };
 
-export const getPageName = (href: string): string => {
-  href = removeLocaleFromPath(href);
-
-  const names = navigation.filter((item) => {
-    if (item.href === removeLocaleFromPath(href)) {
-      return item.name;
-    }
-  });
-
-  return names[0].name ?? "";
-};
-
 export const removeLocaleFromPath = (path: string): string => {
   const validLocales: Locale[] = ["en", "id"];
   const normalizedPath = path.replace(/^\/|\/$/g, "");
@@ -93,31 +80,6 @@ export const formatMillisecondsToSeconds = (milliseconds: number): string => {
   const seconds = milliseconds / 1000;
   return `${seconds.toFixed(2)} s`;
 };
-
-export const formatBalance = (value: bigint, fixed?: boolean): string => {
-  if (fixed) return parseFloat(ethers.utils.formatEther(value)).toFixed(3);
-
-  return `${parseFloat(ethers.utils.formatEther(value))}`;
-};
-
-export function truncateAddress(address: string): string {
-  const start = address.slice(0, 6);
-  const end = address.slice(-6);
-
-  return `${start}.....${end}`;
-}
-
-export function formatNumber(num: number): string {
-  if (num >= 1_000_000_000) {
-    return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
-  } else if (num >= 1_000_000) {
-    return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
-  } else if (num >= 1_000) {
-    return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
-  } else {
-    return num.toString();
-  }
-}
 
 export function showToast({
   isDark,
