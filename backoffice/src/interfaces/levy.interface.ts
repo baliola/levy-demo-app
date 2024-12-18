@@ -1,3 +1,5 @@
+import type { IApiResponse } from "./api.interface";
+
 export interface BaseResponse<T> {
   data: T;
   total: number;
@@ -15,14 +17,20 @@ export interface IBaseRequestParams {
 }
 
 export interface ILevyServices<Response> {
-  getLevyList(params: Response): Promise<Response | void>;
+  getLevyList(params: IBaseRequestParams): Promise<Response | void>;
   getLevyDetail(id: string): Promise<Response | void>;
+  getTotalLevy(): Promise<Response>;
 }
 export type LevyData = {
   id: string;
   user: User;
   levy: Levy;
 };
+
+export interface TotalDataLevy {
+  total_paid: number;
+  total_retribution: number;
+}
 
 export interface Levy {
   voucher_code: string;
@@ -98,6 +106,15 @@ export const dummyResponse: LevyData[] = [
     },
   },
 ];
+
+export type ILevyDetailResponse = IApiResponse<LevyData>;
+export type ILevyListResponse = IApiResponse<LevyData[]>;
+export type ILevyTotalTotal = IApiResponse<TotalDataLevy[]>;
+
+export type ILevyResponse =
+  | ILevyDetailResponse
+  | ILevyListResponse
+  | ILevyTotalTotal;
 
 export const dummyResponseDetail: DataDetailLevy = {
   id: "84f1e659-1f3b-427d-9a2a-a2934fdc77c9",
