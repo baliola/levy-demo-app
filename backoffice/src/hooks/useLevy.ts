@@ -11,6 +11,7 @@ import type {
   TotalDataLevy,
 } from "../interfaces/levy.interface";
 import LevyDetail from "../app/dashboard/levy/components/LevyDetail";
+import { StatusFilter } from "../app/dashboard/levy/components/FilterLevyStatus";
 
 const levyService = new LevyService();
 
@@ -26,6 +27,11 @@ export const useLevy = () => {
   const [selectedLevy, setSelectedLevy] = useState(0);
   const [levyDetail, setLevyDetail] = useState<DataDetailLevy | null>(null);
   const [levySortIsAscending, setlevySortIsAscending] = useState(true);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+
+  const [accountSelectedLevyFilter, setAccountSelectedLevyFilter] =
+    useState<StatusFilter>({ id: 0, name: "" });
+
   const [levyInputValue, setLevyInputValue] = useState("");
   const [levySearchQuery, setLevySearchQuery] = useState("");
   const [levySelectedSort, setLevySelectedSort] = useState("");
@@ -143,5 +149,9 @@ export const useLevy = () => {
     setLevySelectedSort,
     loadingSearch,
     setLoadingSearch,
+    accountSelectedLevyFilter,
+    setAccountSelectedLevyFilter,
+    showFilterModal,
+    setShowFilterModal,
   };
 };

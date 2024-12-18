@@ -20,6 +20,14 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { useLevy } from "@/src/hooks/useLevy";
 import { LevyTable } from "./components/LevyTable";
 import { SearchLevy } from "./components/SearchLevy";
+import { FilterLevy, StatusFilter } from "./components/FilterLevyStatus";
+import { FaRegFileAlt } from "react-icons/fa";
+import { PiMoneyWavy } from "react-icons/pi";
+
+const accountLevyOptions: StatusFilter[] = [
+  { id: 1, name: "unpaid" },
+  { id: 2, name: "paid" },
+];
 
 export default function Account(): ReactElement {
   const {
@@ -48,6 +56,10 @@ export default function Account(): ReactElement {
     getLevyList,
     loadingSearch,
     setLoadingSearch,
+    accountSelectedLevyFilter,
+    setAccountSelectedLevyFilter,
+    showFilterModal,
+    setShowFilterModal,
   } = useLevy();
 
   useEffect(() => {
@@ -66,7 +78,7 @@ export default function Account(): ReactElement {
             <StatItem
               props={{
                 name: `Total Retribution`,
-                icon: FaRegCheckCircle,
+                icon: FaRegFileAlt,
                 value: totalSummary
                   ? (totalSummary?.total_retribution as unknown as string)
                   : "0",
@@ -76,7 +88,7 @@ export default function Account(): ReactElement {
             <StatItem
               props={{
                 name: `Total Paid`,
-                icon: ImCancelCircle,
+                icon: PiMoneyWavy,
                 value: totalSummary
                   ? (totalSummary?.total_paid as unknown as string)
                   : "0",
@@ -104,20 +116,20 @@ export default function Account(): ReactElement {
               </div>
               <div className="w-full flex gap-3 items-end">
                 <div className="grow">
-                  {/* <FilterAccount
+                  <FilterLevy
                     props={{
-                      limitAccount,
-                      accountSortIsAscending,
-                      accountSelectedSort,
-                      accountSearchQuery,
-                      accountSelectedRoleFilter,
-                      accountRoleOptions,
-                      showFilterRoleModal,
-                      setAccountSelectedRoleFilter,
-                      setShowFilterRoleModal,
-                      getAccountList,
-                    }} */}
-                  {/* /> */}
+                      accountLevyOptions,
+                      levySearchQuery,
+                      accountSelectedLevyFilter,
+                      getLevyList,
+                      levySelectedSort,
+                      levySortIsAscending,
+                      limitLevy,
+                      setAccountSelectedLevyFilter,
+                      setShowFilterModal,
+                      showFilterModal,
+                    }}
+                  />
                 </div>
                 <div className="grow">
                   {/* <SortAccount
