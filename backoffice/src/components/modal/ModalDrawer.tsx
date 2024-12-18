@@ -1,17 +1,20 @@
-import { Dialog, Transition } from '@headlessui/react';
-import type { ReactElement, ReactNode } from 'react';
-import { Fragment } from 'react';
+import { Dialog, Transition } from "@headlessui/react";
+import type { ReactElement, ReactNode } from "react";
+import { Fragment } from "react";
 
 interface IModalDrawerProps {
   isOpen: boolean;
   toggle: () => void;
 }
 
-const ModalDrawer = ({ children, props }: { children: ReactNode, props: IModalDrawerProps }): ReactElement => {
-  const {
-    isOpen,
-    toggle
-  } = props
+const ModalDrawer = ({
+  children,
+  props,
+}: {
+  children: ReactNode;
+  props: IModalDrawerProps;
+}): ReactElement => {
+  const { isOpen, toggle } = props;
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -38,7 +41,7 @@ const ModalDrawer = ({ children, props }: { children: ReactNode, props: IModalDr
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Panel className="w-full sm:w-1/2 xl:w-[40%] transform lg:rounded-l-3xl p-6 text-left align-right bg-white h-screen transition-all">
+              <Dialog.Panel className="w-full sm:w-1/2 xl:w-[40%] transform lg:rounded-l-3xl p-6 text-left align-right bg-white  transition-all">
                 {children}
               </Dialog.Panel>
             </Transition.Child>

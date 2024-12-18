@@ -162,23 +162,6 @@ export default function Account(): ReactElement {
                         }}
                       />
                     </div>
-                    {checkUserPermission(
-                      userLoggedIn,
-                      PermissionName.PERMISSION_BACKOFFICE_CREATE_ACCOUNT
-                    ) && (
-                      <div className="flex w-fit">
-                        <ModalAddAccount
-                          props={{
-                            accountRoleOptions,
-                            setAccountSearchQuery,
-                            setAccountInputValue,
-                            setAccountSelectedRoleFilter,
-                            createAccount,
-                            editAccountRole,
-                          }}
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
                 <AccountTable
