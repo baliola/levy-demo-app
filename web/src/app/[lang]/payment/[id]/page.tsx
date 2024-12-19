@@ -33,7 +33,7 @@ const Payment = (): ReactElement => {
   };
 
   return (
-    <div className="p-20 flex justify-center items-center w-full h-full bg-gray-400">
+    <div className="p-20 flex justify-center items-center w-full  bg-gray-400">
       <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 w-1/3 ">
         <div className="flex flex-col w-full p-6">
           <p className="text-xl font-bold">Payment Confirmation</p>
