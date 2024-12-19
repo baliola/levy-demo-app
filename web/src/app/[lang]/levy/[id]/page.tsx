@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import type { ReactElement } from "react";
 import React, { useEffect, useRef } from "react";
 import QRCode from "react-qr-code";
 import { useReactToPrint } from "react-to-print";
 import PrimaryButton from "@/components/button/PrimaryButton";
+import SecondaryButton from "@/components/button/SecondaryButton copy";
 import Images from "@/constants/images";
 import { useLevy } from "@/hooks/levy/use_levy";
 import { formatDateOnly } from "@/utils";
@@ -20,6 +21,8 @@ const LevyPage = (): ReactElement => {
     setLevyId((params as any).id);
   }, [params]);
   const componentRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -47,7 +50,15 @@ const LevyPage = (): ReactElement => {
 
   return (
     <div className="bg-gray-400 pb-10">
-      <div className="p-10 flex flex-col justify-center items-center w-full">
+      <div className="p-10 flex justify-center items-center w-full space-x-4">
+        <SecondaryButton
+          label="Back To Home"
+          className="w-1/4"
+          onClick={(e) => {
+            e.preventDefault();
+            router.replace("/");
+          }}
+        />
         {levyDetail?.data && (
           <PrimaryButton
             label="Download"

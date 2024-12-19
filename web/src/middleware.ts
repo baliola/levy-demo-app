@@ -46,12 +46,12 @@ export function middleware(request: NextRequest): void | NextResponse {
   //     request.cookies.get(CookieKey.IS_LOGGED_IN)?.value === "true";
 
   // Handle root path
-  if (pathname === "/") {
-    // return NextResponse.redirect(
-    //   new URL(isLoggedIn ? `/${locale}/` : `/${locale}/auth/login`, request.url)
-    // );
-    return NextResponse.redirect(new URL(`/${locale}/`));
-  }
+  // if (pathname === "/") {
+  //   // return NextResponse.redirect(
+  //   //   new URL(isLoggedIn ? `/${locale}/` : `/${locale}/auth/login`, request.url)
+  //   // );
+  //   return NextResponse.redirect(new URL(`/${locale}/`));
+  // }
 
   // Check if the current path (without locale) is public
   //   const isPublicPath = PUBLIC_PATHS.some((path) => pathWithoutLocale === path);
