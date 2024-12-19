@@ -1,15 +1,17 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import type { ReactElement } from "react";
+import { type ReactElement, useState } from "react";
+import PrimaryButton from "@/components/button/PrimaryButton";
+import Modal from "@/components/modal/Modal";
 import Images from "@/constants/images";
 import ExemptionForm from "./components/ExemptionForm";
-import type { Locale } from "./dictionaries";
-import { getDictionary } from "./dictionaries";
 
 const navigations = [
   { name: "Events", href: "#", current: true },
@@ -36,12 +38,8 @@ const navigation = {
   ],
 };
 
-export default async function Home({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}): Promise<ReactElement> {
-  const t = await getDictionary(lang);
+export default function Home(): ReactElement {
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <div className="w-full">
@@ -122,23 +120,33 @@ export default async function Home({
             <img
               src="https://img.inews.co.id/media/1200/files/inews_new/2019/07/06/Sanur.jpg"
               alt="Image"
-              className="w-full h-96 object-cover object-center"
+              className="w-full h-screen object-cover object-center"
             />
             <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-            <div className="absolute inset-0 flex flex-col items-start justify-end text-white px-32 pb-10">
-              <h1 className="text-4xl font-bold mb-4">Tourist Levy</h1>
-              <p className="text-lg">
-                {`Understand the criteria and steps for foreign tourists to be
-                exempted from Bali's tourist levy. This includes exemption for
-                official duties, specific citizenship statuses, or contributions
-                to Bali's or Indonesia's development.`}
-              </p>
+            <div className="absolute inset-0 flex flex-col xl:flex-row items-center justify-center xl:justify-between text-white px-32 pb-10 xl:space-x-20 mb-20">
+              <h1 className="text-4xl font-bold mb-4 w-1/2 xl:block hidden">
+                To improve quality of service, safety and convenience of
+                tourists
+              </h1>
+
+              <div className="p-8 rounded-lg bg-white w-1/2">
+                <div className="p-6 bg-slate-100 border-2 border-slate-200 w-full rounded-lg flex flex-col items-center">
+                  <p className="text-lg text-black">Tourist Levy</p>
+                  <p className="font-semibold text-4xl text-black">
+                    IDR 25.000
+                  </p>
+                </div>
+
+                <PrimaryButton
+                  label="Pay Tourist Levy"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                  className="mt-6"
+                />
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="xl:px-32">
-          <ExemptionForm />
         </div>
       </div>
 
@@ -198,6 +206,10 @@ export default async function Home({
           </div>
         </div>
       </footer>
+
+      <Modal title="Tourist Levy Form" isOpen={open} setIsOpen={setOpen}>
+        <ExemptionForm />
+      </Modal>
     </div>
   );
 }

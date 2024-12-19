@@ -57,14 +57,7 @@ const ExemptionForm: React.FC = () => {
 
   return (
     <div className="p-10">
-      {/* <h1 className="text-2xl font-bold mb-4">Exemption Form</h1>
-      <div className="mb-4">
-        {`Please enter the applicant's detail.`}
-        <br />
-        {`For multiple applicants, click "Add More Applicant". (Max 9 applicants)`}
-      </div> */}
-
-      <div className="flex xl:flex-row flex-col flex-wrap w-full mt-14">
+      <div className="flex xl:flex-row flex-col flex-wrap w-full">
         <Formik
           initialValues={levyRequest}
           onSubmit={handleSubmitLevy}
@@ -72,9 +65,7 @@ const ExemptionForm: React.FC = () => {
           suppressHydrationWarning={true}
         >
           {({ errors, handleChange, handleSubmit, values }) => (
-            <Form className="bg-white xl:w-1/2 w-full  rounded-lg shadow-sm ring-1 ring-gray-900/5 p-4 mr-10 mb-10">
-              <h2 className="text-lg font-bold mb-2">Tourist Levy Form</h2>
-
+            <Form className="bg-white w-full p-4 mb-10">
               <div className="mb-4">
                 <PrimaryInput
                   label="Passport Number"
