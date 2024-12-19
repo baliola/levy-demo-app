@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import PrimaryButton from "@/components/button/PrimaryButton";
 import PrimaryInput from "@/components/input/PrimaryInput";
 import RadioInput from "@/components/input/RadioInput";
+import Images from "@/constants/images";
 import { useAuth } from "@/hooks/auth/use_auth";
 import { useLevy } from "@/hooks/levy/use_levy";
 import type LevyRequest from "@/services/data/request/levy/levy_request";
@@ -130,58 +131,79 @@ const ExemptionForm: React.FC = () => {
                 <RadioInput
                   label="VISA"
                   value="visa"
+                  img={Images.visa}
                   checked={selectedValue === "visa"}
                   onChange={(e) => {
-                    handleChangePaymentMethod({ label: "VISA", value: e });
+                    handleChangePaymentMethod({
+                      label: "VISA",
+                      value: e,
+                      img: Images.visa,
+                    });
                   }}
                 />
                 <RadioInput
                   label="Master Card"
                   value="mastercard"
+                  img={Images.mastercard}
                   checked={selectedValue === "mastercard"}
                   onChange={(e) => {
                     handleChangePaymentMethod({
                       label: "Master Card",
                       value: e,
+                      img: Images.mastercard,
                     });
                   }}
                 />
                 <RadioInput
                   label="BCA"
                   value="bca"
+                  img={Images.bca}
                   checked={selectedValue === "bca"}
                   onChange={(e) => {
-                    handleChangePaymentMethod({ label: "BCA", value: e });
+                    handleChangePaymentMethod({
+                      label: "BCA",
+                      value: e,
+                      img: Images.bca,
+                    });
                   }}
                 />
                 <RadioInput
                   label="BPD Bali Channel"
                   value="bpd"
+                  img={Images.bpd}
                   checked={selectedValue === "bpd"}
                   onChange={(e) => {
                     handleChangePaymentMethod({
                       label: "BPD Bali Channel",
                       value: e,
+                      img: Images.bpd,
                     });
                   }}
                 />
                 <RadioInput
                   label="Bank Transfer"
                   value="transfer"
+                  img={Images.tf}
                   checked={selectedValue === "transfer"}
                   onChange={(e) => {
                     handleChangePaymentMethod({
                       label: "Bank Transfer",
                       value: "transfer",
+                      img: Images.tf,
                     });
                   }}
                 />
                 <RadioInput
                   label="QRIS"
                   value="qris"
+                  img={Images.qris}
                   checked={selectedValue === "qris"}
                   onChange={(e) => {
-                    handleChangePaymentMethod({ label: "QRIS", value: e });
+                    handleChangePaymentMethod({
+                      label: "QRIS",
+                      value: e,
+                      img: Images.qris,
+                    });
                   }}
                 />
               </div>

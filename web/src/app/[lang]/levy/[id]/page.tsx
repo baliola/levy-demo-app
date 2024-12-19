@@ -26,7 +26,7 @@ const LevyPage = (): ReactElement => {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: `Levy_voucher_${(params as any).id}`,
+    documentTitle: `Levy_voucher_${levyDetail?.data?.levy?.voucher_code}`,
     pageStyle: `
       @page {
         size: 210mm 297mm;  /* A4 size */
@@ -53,7 +53,7 @@ const LevyPage = (): ReactElement => {
       <div className="p-10 flex justify-center items-center w-full space-x-4">
         <SecondaryButton
           label="Back To Home"
-          className="w-1/4"
+          className="xl:w-1/5 w-1/4"
           onClick={(e) => {
             e.preventDefault();
             router.replace("/");
@@ -63,7 +63,7 @@ const LevyPage = (): ReactElement => {
           <PrimaryButton
             label="Download"
             onClick={handlePrint}
-            className="w-1/4"
+            className="xl:w-1/5 w-1/4"
           />
         )}
       </div>

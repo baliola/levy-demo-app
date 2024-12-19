@@ -3,6 +3,7 @@ import React from "react";
 interface RadioInputProps {
   label: string;
   value: string;
+  img: string;
   checked: boolean;
   onChange: (value: string) => void;
 }
@@ -11,6 +12,7 @@ const RadioInput: React.FC<RadioInputProps> = ({
   label,
   value,
   checked,
+  img,
   onChange,
 }) => {
   return (
@@ -29,7 +31,10 @@ const RadioInput: React.FC<RadioInputProps> = ({
         htmlFor={label}
         className="ml-3 block text-sm/6 font-medium text-gray-900"
       >
-        {label}
+        <div className="flex flex-row items-center space-x-4">
+          <img src={img} alt={label} className="h-10 w-10 object-scale-down" />
+          <p>{label}</p>
+        </div>
       </label>
     </div>
   );
