@@ -81,6 +81,16 @@ export const formatMillisecondsToSeconds = (milliseconds: number): string => {
   return `${seconds.toFixed(2)} s`;
 };
 
+export function formatDateOnly(dateString: string): string {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  };
+  return date.toLocaleDateString("en-GB", options);
+}
+
 export function showToast({
   isDark,
   message,

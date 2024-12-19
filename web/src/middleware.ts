@@ -7,7 +7,7 @@ import CookieKey from "./constants/cookie_key";
 const ignoredExtensions = [".jpg", ".png", ".css", ".js", ".svg", ".ico"];
 const locales = ["en", "id"];
 const defaultLocale = "en";
-const PUBLIC_PATHS = ["/auth/login"];
+const PUBLIC_PATHS = ["/"];
 
 function getLocale(request: NextRequest): string {
   const acceptLang = request.headers.get("Accept-Language");
@@ -37,32 +37,31 @@ export function middleware(request: NextRequest): void | NextResponse {
   const locale = pathnameLocale ?? getLocale(request);
 
   // Get the path without the locale prefix
-  const pathWithoutLocale = pathnameLocale
-    ? pathname.replace(`/${pathnameLocale}`, "")
-    : pathname;
+  //   const pathWithoutLocale = pathnameLocale
+  //     ? pathname.replace(`/${pathnameLocale}`, "")
+  //     : pathname;
 
-  // Check if the user is logged in
-  const isLoggedIn =
-    request.cookies.get(CookieKey.IS_LOGGED_IN)?.value === "true";
+  //   // Check if the user is logged in
+  //   const isLoggedIn =
+  //     request.cookies.get(CookieKey.IS_LOGGED_IN)?.value === "true";
 
   // Handle root path
-  if (pathname === "/") {
-    return NextResponse.redirect(
-      new URL(isLoggedIn ? `/${locale}/` : `/${locale}/auth/login`, request.url)
-    );
-  }
+  // if (pathname === "/") {
+  //   // return NextResponse.redirect(
+  //   //   new URL(isLoggedIn ? `/${locale}/` : `/${locale}/auth/login`, request.url)
+  //   // );
+  //   return NextResponse.redirect(new URL(`/${locale}/`));
+  // }
 
   // Check if the current path (without locale) is public
-  const isPublicPath = PUBLIC_PATHS.some((path) => pathWithoutLocale === path);
+  //   const isPublicPath = PUBLIC_PATHS.some((path) => pathWithoutLocale === path);
 
   // Redirect logic
-  if (!isLoggedIn && !isPublicPath) {
-    // Redirect to login if trying to access protected route while not logged in
-    return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
-  } else if (isLoggedIn && isPublicPath) {
-    // Redirect to dashboard if trying to access public route while logged in
-    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
-  }
+  //   if (!isLoggedIn && !isPublicPath) {
+  //     // Redirect to login if trying to access protected route while not logged in
+  //     // return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
+  //     return NextResponse.redirect(new URL(`/${locale}/`, request.url));
+  //   }
 
   // Add locale to URL if it's missing
   if (!pathnameLocale) {
