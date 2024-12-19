@@ -114,9 +114,16 @@ export const useLevy = (): IUseLevy => {
 
       setTimeout(() => {
         router.replace(`/levy/${value.data.id}`);
-      }, 2000);
+      }, 1000);
     },
     onError: async (error: AxiosError<ApiResponse<LevyDetail>> | any) => {
+      if (!error.status) {
+        setTimeout(() => {
+          router.replace(`/levy/${levyId}`);
+        }, 1000);
+        return;
+      }
+
       showToast({
         message: error?.message,
         status: "error",

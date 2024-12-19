@@ -57,9 +57,9 @@ export class LevyService implements ILevyService {
       return response.data;
     } catch (error: AxiosError<ApiResponse<LevyDetail>> | any) {
       console.error("====================================");
-      console.error("ERROR UPDATE LEVY --> ", error.response.data.message);
+      console.error("ERROR UPDATE LEVY --> ", error.response.data);
       console.error("====================================");
-      throw error.response.data.message;
+      throw error.response.data;
     }
   }
 }
