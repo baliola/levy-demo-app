@@ -52,7 +52,7 @@ const ExemptionForm: React.FC = () => {
   };
 
   useEffect(() => {
-    login({ email: "baliola@test.com", password: "1OndVAQgCg78BUvle1" });
+    login({ email: "levydemo@test.com", password: "p9D3iISGPSttoWB" });
   }, []);
 
   return (
