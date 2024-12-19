@@ -26,7 +26,7 @@ const LevyPage = (): ReactElement => {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: `Levy_voucher_${(params as any).id}`,
+    documentTitle: `Levy_voucher_${levyDetail?.data?.levy?.voucher_code}`,
     pageStyle: `
       @page {
         size: 210mm 297mm;  /* A4 size */
