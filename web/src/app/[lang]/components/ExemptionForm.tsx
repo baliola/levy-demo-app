@@ -2,7 +2,6 @@
 
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import levyValidation from "../validation/levy_validation";
 import PrimaryButton from "@/components/button/PrimaryButton";
 import PrimaryInput from "@/components/input/PrimaryInput";
 import RadioInput from "@/components/input/RadioInput";
@@ -11,6 +10,7 @@ import { useAuth } from "@/hooks/auth/use_auth";
 import { useLevy } from "@/hooks/levy/use_levy";
 import type LevyRequest from "@/services/data/request/levy/levy_request";
 import type PaymentMethod from "@/types/payment_method";
+import levyValidation from "../validation/levy_validation";
 
 const ExemptionForm: React.FC = () => {
   const { isLoadingLevy, levy, setPaymentMethod } = useLevy();
@@ -38,7 +38,7 @@ const ExemptionForm: React.FC = () => {
     levy: {
       levy_status: "UNPAID",
       levy_expired_at: levyExpiredAt.toISOString(),
-      voucher_code: `LEVY${getRandomInt(0, 1000)}`,
+      voucher_code: `PENIDA${getRandomInt(0, 1000)}`,
     },
     user: {
       arrival_date: new Date().toISOString(),
@@ -112,7 +112,7 @@ const ExemptionForm: React.FC = () => {
                 <PrimaryInput
                   type="text"
                   label="Voucher Code"
-                  placeholder="LEVY***"
+                  placeholder="PENIDA***"
                   disabled
                   value={values.levy.voucher_code}
                   onChange={handleChange("levy.voucher_code")}

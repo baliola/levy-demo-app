@@ -77,7 +77,7 @@ export const ModalEditAccount = ({
       >
         <div className="flex flex-col px-2 lg:px-6">
           <div className="flex w-full justify-between">
-            <h2 className="font-bold">Levy Details</h2>
+            <h2 className="font-bold">Penida Voucher Details</h2>
             <button type="button" onClick={toggleModalAccount}>
               <RxCross2 className="text-red-500 w-6 h-6" />
             </button>

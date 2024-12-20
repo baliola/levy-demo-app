@@ -27,7 +27,7 @@ const Header = (): ReactElement => {
 
       <div className="flex flex-1 gap-x-4 items-center lg:gap-x-6 lg:px-8">
         <h1 className="text-primary capitalize font-semibold text-2xl flex">
-          Levy Report
+          Penida Report
         </h1>
       </div>
     </header>

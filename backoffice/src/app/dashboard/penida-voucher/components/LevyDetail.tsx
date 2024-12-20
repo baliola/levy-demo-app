@@ -54,13 +54,17 @@ const LevyDetail = ({ id }: { id: string }): React.ReactElement => {
               <p className="text-gray-700">{levyDetail.levy.voucher_code}</p>
             </div>
             <div className="mb-4">
-              <label className="text-sm font-semibold">Levy Expiry Date:</label>
+              <label className="text-sm font-semibold">
+                Penida Voucher Expiry Date:
+              </label>
               <p className="text-gray-700">
                 {new Date(levyDetail.levy.levy_expired_at).toLocaleDateString()}
               </p>
             </div>
             <div className="mb-4">
-              <label className="text-sm font-semibold">Levy Status:</label>
+              <label className="text-sm font-semibold">
+                Penida Voucher Status:
+              </label>
               <p
                 className={`text-white px-3 py-1 max-w-24 rounded ${
                   levyDetail.levy.levy_status === "UNPAID"

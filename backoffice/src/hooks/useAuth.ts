@@ -26,7 +26,7 @@ export const useAuth = (router: AppRouterInstance): IUseAuth => {
       if (!response) return;
       toast.success(response.message);
       setCookie("accessToken", response?.data.access_token, { maxAge: 3600 });
-      router.push("/dashboard/levy");
+      router.push("/dashboard/penida-voucher");
     } catch (error) {
       const err = error as Error;
       toast.error(err.message);

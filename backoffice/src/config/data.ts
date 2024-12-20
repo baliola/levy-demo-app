@@ -33,8 +33,8 @@ export const navigation: INavigationItem[] = [
     hidden: true,
   },
   {
-    name: "levy",
-    href: "/dashboard/levy",
+    name: "Penida Voucher",
+    href: "/dashboard/penida-voucher",
     blank: false,
     current: false,
     icon: UserGroupIcon,
