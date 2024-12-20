@@ -1,16 +1,15 @@
 import {
-  useEffect,
   type Dispatch,
   type ReactElement,
   type SetStateAction,
+  useEffect,
 } from "react";
 import { CiEdit } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-import { AccountForm } from "./AccountForm";
-import LevyDetail from "./LevyDetail";
 import ModalDrawer from "@/src/components/modal/ModalDrawer";
 import useAccount from "@/src/hooks/useAccount";
+import { useLevy } from "@/src/hooks/useLevy";
 import type {
   IAccountData,
   IAccountRoleData,
@@ -18,7 +17,8 @@ import type {
   IEditAccountRolePayload,
 } from "@/src/interfaces/account.interface";
 import type { LevyData } from "@/src/interfaces/levy.interface";
-import { useLevy } from "@/src/hooks/useLevy";
+import { AccountForm } from "./AccountForm";
+import LevyDetail from "./LevyDetail";
 
 interface IModalEditAccountProps {
   data: LevyData;

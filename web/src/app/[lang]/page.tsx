@@ -8,10 +8,10 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { type ReactElement, useState } from "react";
+import ExemptionForm from "./components/ExemptionForm";
 import PrimaryButton from "@/components/button/PrimaryButton";
 import Modal from "@/components/modal/Modal";
 import Images from "@/constants/images";
-import ExemptionForm from "./components/ExemptionForm";
 
 const navigations = [
   { name: "Events", href: "#", current: true },
@@ -131,14 +131,14 @@ export default function Home(): ReactElement {
 
               <div className="p-8 rounded-lg bg-white w-1/2">
                 <div className="p-6 bg-slate-100 border-2 border-slate-200 w-full rounded-lg flex flex-col items-center">
-                  <p className="text-lg text-black">Tourist Levy</p>
+                  <p className="text-lg text-black">Penida Voucher</p>
                   <p className="font-semibold text-4xl text-black">
                     IDR 25.000
                   </p>
                 </div>
 
                 <PrimaryButton
-                  label="Pay Tourist Levy"
+                  label="Pay Penida Voucher"
                   onClick={() => {
                     setOpen(true);
                   }}
@@ -160,10 +160,10 @@ export default function Home(): ReactElement {
                 className="size-20 object-scale-down"
               />
               <p className="text-balance text-sm/6 text-gray-600">
-                {`Love Bali is a movement started by the Bali Provincial
+                {`Love Penida is a movement started by the Penida Provincial
                 Government to enforce a new policy, the Comprehensive
                 Development Plan. The goal is to preserve the integrity and
-                balance of Bali's nature, its people, and their culture.`}
+                balance of Penida's nature, its people, and their culture.`}
               </p>
             </div>
             <div className="mt-16 xl:mt-0 w-full">
@@ -201,13 +201,13 @@ export default function Home(): ReactElement {
           </div>
           <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
             <p className="text-sm/6 text-gray-600">
-              &copy; 2024 Love Bali, All rights reserved.
+              &copy; 2024 Love Penida, All rights reserved.
             </p>
           </div>
         </div>
       </footer>
 
-      <Modal title="Tourist Levy Form" isOpen={open} setIsOpen={setOpen}>
+      <Modal title="Penida Voucher Form" isOpen={open} setIsOpen={setOpen}>
         <ExemptionForm />
       </Modal>
     </div>

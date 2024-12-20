@@ -10,9 +10,9 @@ import type { Dispatch, ReactElement, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import type { IAccountData } from "@/src/interfaces/account.interface";
+import type { LevyData } from "@/src/interfaces/levy.interface";
 import type { IProjectData } from "@/src/interfaces/project.interface";
 import { Skeleton } from "../skeleton/Skeleton";
-import { LevyData } from "@/src/interfaces/levy.interface";
 
 export type ColumnDefTypes = IProjectData | IAccountData | LevyData;
 

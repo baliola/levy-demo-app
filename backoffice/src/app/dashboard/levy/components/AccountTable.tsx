@@ -7,8 +7,6 @@ import {
   useMemo,
 } from "react";
 import { VscLoading } from "react-icons/vsc";
-import { ModalEditAccount } from "./ModalEditAccount";
-import { ModalResetPassword } from "./ModalResetPassword";
 import { ModalDelete } from "@/src/components/modal/ModalDelete";
 import type { ColumnDefTypes } from "@/src/components/table/PaginationTable";
 import { PaginationTable } from "@/src/components/table/PaginationTable";
@@ -23,6 +21,8 @@ import type {
 import type { LevyData } from "@/src/interfaces/levy.interface";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
+import { ModalEditAccount } from "./ModalEditAccount";
+import { ModalResetPassword } from "./ModalResetPassword";
 
 interface IAccountTableProps {
   accounts: IAccountData[] | undefined;
@@ -120,8 +120,8 @@ export const AccountTable = ({
               info.row.original.levy.levy_status.toLowerCase() === "paid"
                 ? "text-green-500 dark:text-green-400"
                 : info.row.original.levy.levy_status.toLowerCase() === "unpaid"
-                ? "text-red-500 dark:text-red-400"
-                : "text-gray-400 dark:text-indigo-200"
+                  ? "text-red-500 dark:text-red-400"
+                  : "text-gray-400 dark:text-indigo-200"
             }`}
           >
             <p className="capitalize"> {info.row.original.levy.levy_status}</p>

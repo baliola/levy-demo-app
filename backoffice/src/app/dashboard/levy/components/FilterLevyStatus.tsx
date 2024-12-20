@@ -4,7 +4,7 @@ import type {
   IAccountRoleData,
   IParamsAccountList,
 } from "@/src/interfaces/account.interface";
-import { IBaseRequestParams } from "@/src/interfaces/levy.interface";
+import type { IBaseRequestParams } from "@/src/interfaces/levy.interface";
 
 export interface StatusFilter {
   id: number;

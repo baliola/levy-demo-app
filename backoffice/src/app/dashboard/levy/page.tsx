@@ -2,27 +2,28 @@
 
 import Image from "next/image";
 import { type ReactElement, useEffect } from "react";
+import { CiCircleCheck } from "react-icons/ci";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { FaRegFileAlt } from "react-icons/fa";
+import { ImCancelCircle } from "react-icons/im";
+import { PiMoneyWavy } from "react-icons/pi";
 import RestrictedPage from "@/src/components/RestrictedPage";
 import { PermissionName } from "@/src/config/data";
 import Images from "@/src/constants/images";
 import useAccount from "@/src/hooks/useAccount";
+import { useLevy } from "@/src/hooks/useLevy";
 import { useCentralStore } from "@/src/store";
 import { checkUserPermission } from "@/src/utils";
 import { AccountTable } from "./components/AccountTable";
 import { FilterAccount } from "./components/FilterAccount";
+import type { StatusFilter } from "./components/FilterLevyStatus";
+import { FilterLevy } from "./components/FilterLevyStatus";
+import { LevyTable } from "./components/LevyTable";
 import { ModalAddAccount } from "./components/ModalAddAccount";
 import { SearchAccount } from "./components/SearchAccount";
+import { SearchLevy } from "./components/SearchLevy";
 import { SortAccount } from "./components/SortAccount";
 import StatItem from "./components/StatsItem";
-import { CiCircleCheck } from "react-icons/ci";
-import { ImCancelCircle } from "react-icons/im";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { useLevy } from "@/src/hooks/useLevy";
-import { LevyTable } from "./components/LevyTable";
-import { SearchLevy } from "./components/SearchLevy";
-import { FilterLevy, StatusFilter } from "./components/FilterLevyStatus";
-import { FaRegFileAlt } from "react-icons/fa";
-import { PiMoneyWavy } from "react-icons/pi";
 
 const accountLevyOptions: StatusFilter[] = [
   { id: 1, name: "unpaid" },

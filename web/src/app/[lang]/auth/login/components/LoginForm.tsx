@@ -3,12 +3,12 @@
 import { Form, Formik } from "formik";
 import type { ReactElement } from "react";
 import React, { useState } from "react";
+import loginValidation from "../validation/login_validation";
 import PrimaryButton from "@/components/button/PrimaryButton";
 import PrimaryInput from "@/components/input/PrimaryInput";
 import Images from "@/constants/images";
 import { useAuth } from "@/hooks/auth/use_auth";
 import type LoginRequest from "@/services/data/request/auth/login_request";
-import loginValidation from "../validation/login_validation";
 
 const LoginForm = (): ReactElement => {
   const { isLoadingLogin, login } = useAuth();

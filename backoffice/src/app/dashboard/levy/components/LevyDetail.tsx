@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import type { DataDetailLevy } from "@/src/interfaces/levy.interface";
-import { useLevy } from "@/src/hooks/useLevy";
 import { Skeleton } from "@/src/components/skeleton/Skeleton";
+import { useLevy } from "@/src/hooks/useLevy";
+import type { DataDetailLevy } from "@/src/interfaces/levy.interface";
 
 const LevyDetail = ({ id }: { id: string }): React.ReactElement => {
   const { levyDetail, fetchLevyDetail, loading } = useLevy();

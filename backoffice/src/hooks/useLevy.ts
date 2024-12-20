@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { LevyService } from "../services/levy.service";
+import type { StatusFilter } from "../app/dashboard/levy/components/FilterLevyStatus";
+import LevyDetail from "../app/dashboard/levy/components/LevyDetail";
 import type {
+  DataDetailLevy,
   IBaseRequestParams,
   ILevyDetailResponse,
   ILevyListResponse,
   ILevyTotalTotal,
   LevyData,
-  DataDetailLevy,
   TotalDataLevy,
 } from "../interfaces/levy.interface";
-import LevyDetail from "../app/dashboard/levy/components/LevyDetail";
-import { StatusFilter } from "../app/dashboard/levy/components/FilterLevyStatus";
+import { LevyService } from "../services/levy.service";
 
 const levyService = new LevyService();
 

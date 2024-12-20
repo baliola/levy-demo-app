@@ -2,8 +2,8 @@ import type { IDictionaries } from "@/types/dictionaries";
 
 const id: IDictionaries = {
   head: {
-    title: "Levy Tourist",
-    description: "Levy Tourist",
+    title: "Penida Voucher",
+    description: "Penida Voucher",
   },
 };
 

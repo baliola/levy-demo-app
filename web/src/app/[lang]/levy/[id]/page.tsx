@@ -75,13 +75,13 @@ const LevyPage = (): ReactElement => {
               <div className="flex flex-col justify-between items-center bg-white border border-gray-300 rounded-lg overflow-hidden h-full">
                 <div className="flex flex-col items-center p-5 w-3/4">
                   <img
-                    src={Images.logoBali}
-                    alt="Bali Logo"
+                    src={Images.logo}
+                    alt="Penida Logo"
                     className="w-32 h-20 object-contain"
                   />
-                  <h1 className="text-lg font-bold mt-3">Levy Voucher!</h1>
+                  <h1 className="text-lg font-bold mt-3">Penida Voucher!</h1>
                   <p className="text-sm mb-5 text-center">
-                    {` Protect Bali's Paradise: Your Contribution Matters`}
+                    {` Protect Penida's Paradise: Your Contribution Matters`}
                   </p>
 
                   <div className="flex my-8">

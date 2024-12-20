@@ -2,6 +2,7 @@
 
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import levyValidation from "../validation/levy_validation";
 import PrimaryButton from "@/components/button/PrimaryButton";
 import PrimaryInput from "@/components/input/PrimaryInput";
 import RadioInput from "@/components/input/RadioInput";
@@ -10,7 +11,6 @@ import { useAuth } from "@/hooks/auth/use_auth";
 import { useLevy } from "@/hooks/levy/use_levy";
 import type LevyRequest from "@/services/data/request/levy/levy_request";
 import type PaymentMethod from "@/types/payment_method";
-import levyValidation from "../validation/levy_validation";
 
 const ExemptionForm: React.FC = () => {
   const { isLoadingLevy, levy, setPaymentMethod } = useLevy();
@@ -168,13 +168,13 @@ const ExemptionForm: React.FC = () => {
                   }}
                 />
                 <RadioInput
-                  label="BPD Bali Channel"
+                  label="BPD Penida Channel"
                   value="bpd"
                   img={Images.bpd}
                   checked={selectedValue === "bpd"}
                   onChange={(e) => {
                     handleChangePaymentMethod({
-                      label: "BPD Bali Channel",
+                      label: "BPD Penida Channel",
                       value: e,
                       img: Images.bpd,
                     });
