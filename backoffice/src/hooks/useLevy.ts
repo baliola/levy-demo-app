@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import type { StatusFilter } from "../app/dashboard/levy/components/FilterLevyStatus";
-import LevyDetail from "../app/dashboard/levy/components/LevyDetail";
+
+import type { StatusFilter } from "../app/dashboard/penida-voucher/components/FilterLevyStatus";
 import type {
   DataDetailLevy,
   IBaseRequestParams,

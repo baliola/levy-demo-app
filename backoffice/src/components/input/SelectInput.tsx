@@ -1,7 +1,7 @@
 import type { FormikErrors } from "formik";
 import { type ReactElement, useState } from "react";
 import { LuListFilter } from "react-icons/lu";
-import type { IAccountValues } from "@/src/app/dashboard/levy/components/AccountForm";
+import type { IAccountValues } from "@/src/app/dashboard/penida-voucher/components/AccountForm";
 
 interface ISelectInputProps {
   value: { id: number; name: string };
