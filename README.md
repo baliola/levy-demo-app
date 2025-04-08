@@ -166,4 +166,4 @@ npm run cypress:open
 
 ## License
 
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details. 
+This project is licensed under the  Apache License 2.0 License.
